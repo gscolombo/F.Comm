@@ -1,0 +1,50 @@
+// Cores
+$pink: #DD5B57;
+$dark-blue: #263147;
+$light-blue: #818CA6;
+$light-grey: #F9F9F9;
+
+// Tipografia
+$font-sizes: 10, 14, 20, 24, 28, 40;
+
+@mixin typo($size, $weight) {
+    font-family: 'K2D', sans-serif;
+    font-size: $size + px;
+    font-weight: $weight;
+    line-height: $size * 1.3 + px;
+}
+
+@mixin slide($width, $height: unset){
+    .slide-container {
+        min-width: 100%;
+        height: $height;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .slide {
+            max-width: $width;
+            margin: 0 auto;
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            overflow-x: hidden;
+        }
+        .custom-scrollbar {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            position: relative;
+            left: -25px;
+            min-width: calc(0.2 * #{$width});
+            .track {
+                min-width: 50%;
+            }
+            .thumb {
+                position: relative;
+                left: 50px;
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+.services {
+    background-image: url('/img/services/bg-services.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    padding-bottom: 130px;
+    header {
+        padding-top: 80px;
+        h2 {
+            color: white;
+        }
+        p {
+            color: $light-blue;
+        }
+    }
+    @include slide(960px, 400px);
+    .slide .item {
+        min-width: calc(33.3% - 20px);
+        width: 300px;
+        height: min(37vw, 100%);
+        background-color: $dark-blue;
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+        .item-content {
+            display: flex;
+            min-height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        img {
+            margin-bottom: 40px;
+        }
+        h4 {
+            text-transform: uppercase;
+            color: $pink;
+            margin-bottom: 17px;
+        }
+        p {
+            color: white;
+            font-size: clamp(13px, 1vw, 14px);
+            height: 100px;
+        }
+    }
+}
+

@@ -1,0 +1,19 @@
+@mixin unclipFromLeft($id, $length_1: 0, $length_2: 0, $length_3: 0, $length_4: 0) {
+    @keyframes unclipFromLeft_#{$id} {
+        from {
+            clip-path: inset(0 #{$length_1} 0 #{$length_2});
+        } to {
+            clip-path: inset(0 #{$length_3} 0 #{$length_4});
+        }
+    }
+}
+
+@keyframes grow {
+    from {
+        opacity: 0;
+        transform: scale3d(0, 0, 0);
+    } to {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}

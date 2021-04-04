@@ -1,0 +1,25 @@
+.about .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 80%;
+    img {
+        min-width: 50%;
+    }
+    .text {
+        max-width: 50%;
+        margin-left: 40px;
+        h4 {
+            color: $pink;
+            text-transform: uppercase;
+            margin-bottom: 17px;
+        }
+        h3 {
+            max-width: 75%;
+            margin-bottom: 35px;
+        }
+        p {
+            color: $light-blue;
+        }
+    }
+}

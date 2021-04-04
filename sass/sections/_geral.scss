@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 960px;
+    margin: 0 auto;
+}
+
+h1 {
+    @include typo(40, 700);
+}
+
+h2 {
+    @include typo(28, 700);
+}
+
+h3 {
+    @include typo(24, 300);
+}
+
+h4 {
+    @include typo(18, 700);
+}
+
+h5 {
+    @include typo(14, 700);
+}
+
+p, a  {
+    @include typo(16, 300);
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+section header {
+    width: 60%;
+    max-width: 480px;
+    margin: 80px auto 40px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+        width: 50px;
+        margin-bottom: 40px;
+    }
+    h4 {
+        color: $pink;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+    p {
+        margin-top: 15px;
+        width: 75%;
+        color: $light-blue;
+    }
+}
+
+// Cabeçalho
+.menu {
+    min-width: 100%;
+    position: fixed;
+    z-index: 10;
+    background-color: $pink;
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 5px 0;
+        min-width: 60%;
+        margin: 0 auto;
+        img {
+            margin-left: 20px;
+        }
+        ul {
+            margin-right: 20px;
+            display: flex;
+        }
+        a {
+            margin: 0 10px;
+            padding-bottom: 4px;
+            @include typo(14, 300);
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 1;
+            transition: all 0.3s;
+            &:hover {
+                box-shadow: 0 2px 0 0 white;
+            }
+        }
+    }
+}
+
+// Rodapé
+footer {
+    padding: 20px 0;
+    margin-top: 80px;
+    min-width: 100%;
+    background: $dark-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    .social-media-links {
+        display: flex;
+        justify-content: center;
+        img {
+            margin: 0 7.5px 20px 7.5px;
+        }
+    }
+}

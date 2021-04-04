@@ -1,0 +1,52 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    nav {
+        background-color: white;
+        padding: 4px 5px;
+        border-radius: 100px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+        min-width: 500px;
+        min-height: 33px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        button {
+            background: none;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px 13.5px;
+            border-radius: 100px;
+            @include typo(10, 700);
+            color: $dark-blue;
+            transition: all 0.2s;
+            &:hover, &.active {
+                background: $pink;
+                color: white;
+            }
+        }
+    }
+}
+
+.works {
+    min-width: 60%;
+    margin: 40px 20px 0 20px;
+    ul {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        li {
+            transition: all 0.3s;
+            cursor: pointer;
+            &:hover {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            img {
+                min-width: 100%;
+            }
+        }
+    }
+}
+
