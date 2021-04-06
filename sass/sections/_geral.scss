@@ -66,9 +66,14 @@ section header {
     @include media-querie('mobile') {
         width: 90%;
     }
-    img {
+    .bar {
         width: 50px;
         margin-bottom: 40px;
+        clip-path: inset(0 50% 0 50%);
+        transition: all 0.8s;
+        &.active {
+            clip-path: inset(0 0 0 0);
+        }
     }
     h4 {
         color: $pink;
@@ -143,6 +148,19 @@ section header {
         position: relative;
         @include media-querie('tablet') {
             min-width: 25vw;
+        }
+        @include media-querie('mobile&tablet') {
+            .logo-container {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100vw;
+                min-height: 80px;
+                transition: all 0.3s;
+                &.bg-set {
+                    background-color: $pink;
+                }
+            }
         }
         img {
             margin-left: 20px;

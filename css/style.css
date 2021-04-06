@@ -187,9 +187,16 @@ section header {
     width: 90%;
   }
 }
-section header img {
+section header .bar {
   width: 50px;
   margin-bottom: 40px;
+  -webkit-clip-path: inset(0 50% 0 50%);
+          clip-path: inset(0 50% 0 50%);
+  transition: all 0.8s;
+}
+section header .bar.active {
+  -webkit-clip-path: inset(0 0 0 0);
+          clip-path: inset(0 0 0 0);
 }
 section header h4 {
   color: #DD5B57;
@@ -281,6 +288,19 @@ section header p {
 @media (min-width: 768px) and (max-width: 960px) {
   .menu nav {
     min-width: 25vw;
+  }
+}
+@media (max-width: 960px) {
+  .menu nav .logo-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    min-height: 80px;
+    transition: all 0.3s;
+  }
+  .menu nav .logo-container.bg-set {
+    background-color: #DD5B57;
   }
 }
 .menu nav img {
