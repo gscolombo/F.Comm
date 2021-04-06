@@ -15,6 +15,7 @@ $light-grey: #F9F9F9;
 // Media-queries
 $tablet: 768px;
 $desktop: 960px;
+$x-large: 1920px;
 
 @mixin media-querie($size, $width: 0) {
     @if $size == 'mobile' {
@@ -35,6 +36,10 @@ $desktop: 960px;
         }
     } @else if $size == 'tablet&desktop' {
         @media (min-width: $tablet) {
+            @content;
+        }
+    } @else if $size == 'x-large' {
+        @media (min-width: $x-large){
             @content;
         }
     } @else if $size == 'custom' {

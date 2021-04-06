@@ -55,6 +55,12 @@ img {
     max-width: 100%;
 }
 
+section {
+    @include media-querie('x-large'){
+        min-height: 60vh;
+    }
+}
+
 section header {
     width: 60%;
     max-width: 480px;
@@ -92,7 +98,7 @@ section header {
     width: 100%;
     position: fixed;
     z-index: 10;
-    background-color: $pink;
+    background-color: transparent;
     transition: all 0.5s;
     .sandwich, .close {
         display: none;
@@ -105,7 +111,7 @@ section header {
         .sandwich, .close {
             display: block;
             position: fixed;
-            top: 5%;
+            top: 20px;
             right: 10%;
             cursor: pointer;
             transition: all 0.5s ease;
@@ -146,19 +152,33 @@ section header {
         min-width: 60%;
         margin: 0 auto;
         position: relative;
+        .visible {
+            box-shadow: 0 4px transparent, 0 1.5px white;
+        }
         @include media-querie('tablet') {
             min-width: 25vw;
         }
+        @include media-querie('desktop') {
+            .logo-container.bg-set {
+                background-color: transparent;
+            }
+        }
         @include media-querie('mobile&tablet') {
+            background-color: $pink;
             .logo-container {
                 position: fixed;
                 left: 0;
                 top: 0;
                 width: 100vw;
-                min-height: 80px;
-                transition: all 0.3s;
+                height: 80px;
+                transition: all 0.5s;
                 &.bg-set {
-                    background-color: $pink;
+                    height: 40px;
+                    .logo {
+                        left: 10%;
+                        top: -10px;
+                        transform: scale3d(0.5, 0.5, 0.5);
+                    }
                 }
             }
         }
@@ -193,14 +213,22 @@ section header {
             cursor: pointer;
             text-decoration: none;
             z-index: 1;
+            box-shadow: 0 5.5px transparent;
             transition: all 0.3s;
             &:hover {
-                box-shadow: 0 2px 0 0 white;
+                box-shadow: 0 4px transparent, 0 1.5px white;
             }
             @include media-querie('tablet') {
                 @include typo(20, 300)
             }
         }
+    }
+}
+
+.bg-set {
+    background-color: $pink;
+    & .sandwich, & .close {
+        top: 15px;
     }
 }
 

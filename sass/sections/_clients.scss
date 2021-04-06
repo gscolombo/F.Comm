@@ -1,4 +1,7 @@
 .clients {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     @include slide;
     .slide {
         @include media-querie('mobile') {
