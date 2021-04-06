@@ -219,14 +219,15 @@ section header p {
     max-width: fit-content;
     height: 100%;
     z-index: 10;
-    right: 100%;
+    right: -50%;
   }
   .menu .sandwich, .menu .close {
-    opacity: 0;
     display: block;
     position: fixed;
     top: 5%;
     right: 10%;
+    cursor: pointer;
+    transition: all 0.5s ease;
   }
 }
 @media (max-width: 960px) and (min-width: 768px) and (max-width: 960px) {
@@ -236,7 +237,16 @@ section header p {
 }
 @media (max-width: 960px) {
   .menu .sandwich {
-    opacity: 1;
+    -webkit-clip-path: inset(0 0% 0 0%);
+            clip-path: inset(0 0% 0 0%);
+    z-index: 1;
+  }
+}
+@media (max-width: 960px) {
+  .menu .close {
+    -webkit-clip-path: inset(0 50% 0 50%);
+            clip-path: inset(0 50% 0 50%);
+    z-index: 0;
   }
 }
 @media (max-width: 960px) {
@@ -244,10 +254,14 @@ section header p {
     right: 0;
   }
   .menu.active .sandwich {
-    opacity: 0;
+    -webkit-clip-path: inset(0 50% 100% 50%);
+            clip-path: inset(0 50% 100% 50%);
+    z-index: 0;
   }
   .menu.active .close {
-    opacity: 1;
+    -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+    z-index: 1;
   }
 }
 @media (max-width: 960px) and (max-width: 350px) {
@@ -400,6 +414,8 @@ footer .social-media-links img {
   min-width: fit-content;
   padding: 10px;
   margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.25s;
   font-family: "K2D", sans-serif;
   font-size: 14px;
   font-weight: 700;
@@ -419,10 +435,16 @@ footer .social-media-links img {
   border-radius: 100px;
   padding: 10px 26px;
 }
+.home .buttons a:first-child:hover {
+  box-shadow: 2px 6px #DD5B57;
+}
 .home .buttons a:last-child {
   color: white;
   background-color: #DD5B57;
   border-radius: 100px;
+}
+.home .buttons a:last-child:hover {
+  box-shadow: 2px 6px white;
 }
 
 @-webkit-keyframes unclipFromLeft_line {
@@ -449,7 +471,10 @@ footer .social-media-links img {
 .cool-line {
   position: absolute;
   min-width: 100%;
-  height: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  bottom: 5%;
 }
 .cool-line img {
   position: absolute;

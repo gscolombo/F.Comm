@@ -96,27 +96,35 @@ section header {
         max-width: fit-content;
         height: 100%;
         z-index: 10;
-        right: 100%;
+        right: -50%;
         .sandwich, .close {
-            opacity: 0;
             display: block;
             position: fixed;
             top: 5%;
             right: 10%;
+            cursor: pointer;
+            transition: all 0.5s ease;
             @include media-querie('tablet') {
                 min-width: 20px;
             }
         }
         .sandwich {
-            opacity: 1;
+            clip-path: inset(0 0% 0 0%);
+            z-index: 1;
+        }
+        .close {
+            clip-path: inset(0 50% 0 50%);
+            z-index: 0;
         }
         &.active {
             right: 0;
             .sandwich {
-                opacity: 0;
+                clip-path: inset(0 50% 100% 50%);
+                z-index: 0;
             }
             .close {
-                opacity: 1;
+                clip-path: inset(0 0 0 0);
+                z-index: 1;
             }
             @include media-querie('custom', 350px) {
                 .logo {
