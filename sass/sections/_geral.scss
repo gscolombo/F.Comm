@@ -9,18 +9,30 @@
 
 h1 {
     @include typo(40, 700);
+    @include media-querie('mobile') {
+        @include typo(28, 700);
+    }
 }
 
 h2 {
     @include typo(28, 700);
+    @include media-querie('mobile') {
+        @include typo(20, 300);
+    }
 }
 
 h3 {
     @include typo(24, 300);
+    @include media-querie('mobile') {
+        @include typo(16, 300);
+    }
 }
 
 h4 {
     @include typo(18, 700);
+    @include media-querie('mobile') {
+        @include typo(12, 300);
+    }
 }
 
 h5 {
@@ -29,6 +41,9 @@ h5 {
 
 p, a  {
     @include typo(16, 300);
+    @include media-querie('mobile') {
+        @include typo(12, 300);
+    }
 }
 
 a {
@@ -48,6 +63,9 @@ section header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    @include media-querie('mobile') {
+        width: 90%;
+    }
     img {
         width: 50px;
         margin-bottom: 40px;
@@ -66,10 +84,47 @@ section header {
 
 // Cabeçalho
 .menu {
-    min-width: 100%;
+    width: 100%;
     position: fixed;
     z-index: 10;
     background-color: $pink;
+    transition: all 0.5s;
+    .sandwich, .close {
+        display: none;
+    }
+    @include media-querie('mobile&tablet') {
+        max-width: fit-content;
+        height: 100%;
+        z-index: 10;
+        right: 100%;
+        .sandwich, .close {
+            opacity: 0;
+            display: block;
+            position: fixed;
+            top: 5%;
+            right: 10%;
+            @include media-querie('tablet') {
+                min-width: 20px;
+            }
+        }
+        .sandwich {
+            opacity: 1;
+        }
+        &.active {
+            right: 0;
+            .sandwich {
+                opacity: 0;
+            }
+            .close {
+                opacity: 1;
+            }
+            @include media-querie('custom', 350px) {
+                .logo {
+                    left: 25%;
+                }
+            }
+        }
+    }
     nav {
         display: flex;
         align-items: center;
@@ -77,12 +132,32 @@ section header {
         padding: 5px 0;
         min-width: 60%;
         margin: 0 auto;
+        position: relative;
+        @include media-querie('tablet') {
+            min-width: 25vw;
+        }
         img {
             margin-left: 20px;
+            transition: all 0.5s;
+            @include media-querie('mobile&tablet') {
+                margin: 0;
+                position: fixed;
+                top: 10px;
+                left: calc(50% - 46px);
+            }
         }
         ul {
             margin-right: 20px;
             display: flex;
+            transition: all 0.3s;
+            @include media-querie('mobile&tablet') {
+                text-align: center;
+                flex-direction: column;
+                min-height: 100vh;
+                justify-content: space-evenly;
+                margin: 0;
+                padding: 10vh 0 40vh 0;
+            }
         }
         a {
             margin: 0 10px;
@@ -95,6 +170,9 @@ section header {
             transition: all 0.3s;
             &:hover {
                 box-shadow: 0 2px 0 0 white;
+            }
+            @include media-querie('tablet') {
+                @include typo(20, 300)
             }
         }
     }

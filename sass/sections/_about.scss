@@ -3,12 +3,26 @@
     align-items: center;
     justify-content: center;
     max-width: 80%;
+    @include media-querie('tablet') {
+        max-width: 90%;
+    }
+    @include media-querie('mobile') {
+        flex-direction: column;
+    }
     img {
         min-width: 50%;
+        @include media-querie('mobile') {
+            min-width: 75%;
+        }
     }
     .text {
         max-width: 50%;
         margin-left: 40px;
+        @include media-querie('mobile') {
+            max-width: 100%;
+            margin-top: 40px;
+            margin-left: 0;
+        }
         h4 {
             color: $pink;
             text-transform: uppercase;

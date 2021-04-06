@@ -1,6 +1,13 @@
 .contact .container {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+    @include media-querie('mobile&tablet') {
+        max-width: 90%;
+    }
+    @include media-querie('mobile'){
+        flex-direction: column;
+    }
     .contact-data .data {
         display: grid;
         grid-template-columns: fit-content(100%) 1fr;
@@ -8,10 +15,14 @@
         img {
             grid-row: 1 / -3;
             margin: auto 10px auto 0;
+            max-width: fit-content;
         }
         h5 {
             text-transform: uppercase;
             margin-bottom: 5px;
+            @include media-querie('mobile&tablet') {
+                font-size: 12px;
+            }
         }
         &:last-of-type h5{
             margin-bottom: 10px;
@@ -20,20 +31,36 @@
             grid-column: 2;
             color: $light-blue;
             @include typo(14, 300);
+            @include media-querie('mobile&tablet') {
+                font-size: 12px;
+            }
         }
     }
     form {
         display: grid;
         grid-template-columns: 1fr 1fr;
         margin-left: 50px;
-        @include typo(14, 300);
         color: $light-blue;
+        min-width: 50%;
+        @include media-querie('mobile'){
+            min-width: 100%;
+            margin: 0;
+            padding: 0 10px;
+        }
         #name {
             grid-column: 1;
             margin-right: 15px;
+            @include media-querie('mobile&tablet') {
+                grid-column: 1 / -1;
+                min-width: 100%;
+            }
         }
         #email {
             grid-column: 2;
+            @include media-querie('mobile&tablet') {
+                grid-column: 1 / -1;
+                min-width: 100%;
+            }
         }
         #subject, textarea, button {
             grid-column: 1 / -1;
@@ -49,6 +76,7 @@
             &:focus {
                 box-shadow: 0 0 0 2px $pink;
             }
+            @include typo(14, 300);
         }
         button {
             background: $pink;

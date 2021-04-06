@@ -16,24 +16,52 @@
     p {
         margin-bottom: 20px;
     }
+    @include media-querie('mobile') {
+        h3, h1 {
+            max-width: 80%;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-top: 18px;
+            margin-bottom: 12px;
+        }
+        p {
+            margin-bottom: 20px;
+            @include media-querie('custom', 350px){
+                max-width: 90%;
+                margin: 0 auto 20px auto;
+                br {
+                    display: none;
+                }
+            }
+        }
+    }
     .buttons {
         display: flex;
         width: 40%;
         margin: 0 auto;
-        justify-content: space-evenly;
+        justify-content: center;
+        @include media-querie('mobile') {
+            width: 100%;
+        }
         a {
             text-transform: uppercase;
+            min-width: fit-content;
+            padding: 10px;
+            margin: 0 5px;
             @include typo(14, 700);
+            @include media-querie('mobile') {
+                @include typo(8, 700);
+            }
         }
         a:first-child {
             color: $pink;
-            padding: 10px 26px;
             background-color: white;
             border-radius: 100px;
+            padding: 10px 26px;
         }
         a:last-child {
             color: white;
-            padding: 10px;
             background-color: $pink;
             border-radius: 100px;
         }

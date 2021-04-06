@@ -1,5 +1,10 @@
 .clients {
-    @include slide(80%);
+    @include slide;
+    .slide {
+        @include media-querie('mobile') {
+            padding: 0 10%;
+        }
+    }
     .item {
         min-width: calc(20% - 20px);
         border: 1px solid $light-blue;
@@ -8,8 +13,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
+        transition: all 0.3s;
+        @include media-querie('mobile') {
+            min-width: calc(33.3% - 20px);
+        }
         img {
             min-width: 100%;
+            transition: all 0.3s;
+        }
+        &:hover {
+            img {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            box-shadow: 0 0 0 1px $light-blue;
         }
     }
 }

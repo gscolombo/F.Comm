@@ -4,7 +4,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    padding-bottom: 130px;
+    padding-bottom: 85px;
     header {
         padding-top: 80px;
         h2 {
@@ -14,35 +14,44 @@
             color: $light-blue;
         }
     }
-    @include slide(960px, 400px);
-    .slide .item {
-        min-width: calc(33.3% - 20px);
-        width: 300px;
-        height: min(37vw, 100%);
-        background-color: $dark-blue;
+    @include slide();
+    .slide {
+        @include media-querie('mobile') {
+            padding: 0 15%;
+        }
+    }
+    .item {
         margin: 0 10px;
+        min-width: calc(33.3% - 20px);
         display: flex;
-        align-items: center;
+        @include media-querie('tablet') {
+            min-width: calc(50% - 20px);
+        }
+        @include media-querie('mobile') {
+            min-width: calc(100% - 20px);
+        }
         .item-content {
-            display: flex;
-            min-height: 100%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            background: $dark-blue;
+            border-radius: 5px;
+            display: grid;
+            grid-template-rows: repeat(2, fit-content(100%)) 1fr;
+            padding: 40px 20px;
+            margin: 0 auto;
+            @include media-querie('mobile') {
+                max-width: 400px;
+                padding: 20px;
+            }
         }
         img {
-            margin-bottom: 40px;
+            margin: 0 auto;
         }
         h4 {
             text-transform: uppercase;
             color: $pink;
-            margin-bottom: 17px;
+            margin: 40px auto 17px auto;
         }
         p {
             color: white;
-            font-size: clamp(13px, 1vw, 14px);
-            height: 100px;
         }
     }
 }
