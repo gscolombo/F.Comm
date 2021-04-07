@@ -34,7 +34,7 @@ export default function gridMenu(){
             if (work.getAttribute(attr) === attribute){
                 work.classList.add('selected');
             } else if (attribute === 'all') {
-                work.classList.add('selected');
+                work.classList.remove('selected');
             } else {
                 work.classList.add('hidden');
             }
@@ -49,13 +49,16 @@ export default function gridMenu(){
             btn.classList.remove('selected', 'hidden');
             btn.removeEventListener(event.type, select);
         });
-        works.forEach(work => {
-            work.classList.add('waiting');
-            work.classList.remove('selected', 'hidden');
-        });
 
         const btn = event.currentTarget;
         btn.classList.add('selected');
+
+        works.forEach(work => {
+            if (btn.getAttribute('data-port') !== 'all') {
+                work.classList.add('waiting');
+            }
+            work.classList.remove('hidden');
+        });
         
         options.forEach(btn => {
             if (!btn.classList.contains('selected')){
