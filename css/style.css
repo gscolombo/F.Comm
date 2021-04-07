@@ -73,6 +73,22 @@ table {
     transform: scale3d(1, 1, 1);
   }
 }
+@-webkit-keyframes shrink {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+  to {
+    transform: scale3d(0, 0, 0);
+  }
+}
+@keyframes shrink {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+  to {
+    transform: scale3d(0, 0, 0);
+  }
+}
 * {
   box-sizing: border-box;
 }
@@ -739,16 +755,53 @@ footer .social-media-links img {
   padding: 4px 5px;
   border-radius: 100px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  max-width: 500px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
   min-height: 33px;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
+.list nav .open {
+  display: none;
+}
 @media (max-width: 767px) {
   .list nav {
+    background: transparent;
+    box-shadow: none;
+    position: relative;
+  }
+  .list nav .menu-options {
+    display: flex;
     flex-direction: column;
-    border-radius: 5px;
+  }
+  .list nav .menu-options .hidden {
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    transition-duration: 0.12s;
+  }
+  .list nav .open {
+    display: block;
+    padding: 0;
+    position: absolute;
+    right: -25px;
+    top: 15px;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-top: 10px solid #DD5B57;
+    border-bottom: 0px solid transparent;
+    transition: all 0.3s;
+  }
+  .list nav .open:hover {
+    background: transparent;
+  }
+  .list nav .open.active {
+    border-bottom: 10px solid #DD5B57;
+    border-top: 0px solid transparent;
   }
 }
 .list nav button {
@@ -757,15 +810,21 @@ footer .social-media-links img {
   border: none;
   cursor: pointer;
   padding: 6px 13.5px;
+  margin: 0 5px;
   border-radius: 100px;
   font-family: "K2D", sans-serif;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 13px;
+  line-height: 18.2px;
   color: #263147;
-  transition: all 0.2s;
+  transition: all 0.3s;
 }
-.list nav button:hover, .list nav button.active {
+@media (max-width: 767px) {
+  .list nav button {
+    margin: 5px 0;
+  }
+}
+.list nav button:hover, .list nav button.selected {
   background: #DD5B57;
   color: white;
 }
@@ -777,10 +836,30 @@ footer .social-media-links img {
 .works ul {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "a b c d e" "f g h i j";
   gap: 20px;
 }
+.works ul .hidden {
+  transform: scale3d(0, 0, 0);
+}
+.works ul .waiting {
+  transform: scale3d(0, 0, 0);
+}
+.works ul .waiting:hover {
+  transform: none;
+}
+.works ul .selected {
+  -webkit-animation: grow 0.5s;
+          animation: grow 0.5s;
+}
+@media (max-width: 767px) {
+  .works ul {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "a b" "c d" "e f" "g h" "i j";
+  }
+}
 .works ul li {
-  transition: all 0.3s;
+  transition: all 0.5s;
   cursor: pointer;
 }
 .works ul li:hover {
@@ -882,6 +961,9 @@ footer .social-media-links img {
 .social-media .slide-container .custom-scrollbar .thumb {
   position: absolute;
   left: 0;
+}
+.social-media .slide {
+  padding-bottom: 10px;
 }
 @media (max-width: 767px) {
   .social-media .slide {

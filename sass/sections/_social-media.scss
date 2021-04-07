@@ -1,6 +1,7 @@
 .social-media {
     @include slide;
     .slide {
+        padding-bottom: 10px;
         @include media-querie('mobile') {
             padding: 0 20% 10px 20%;
         }

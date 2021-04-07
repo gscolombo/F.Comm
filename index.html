@@ -131,24 +131,27 @@
         </header>
         <div class="list">
             <nav>
-                <button data-port="all">Todos os projetos</button>
-                <button data-port="visual-id">Identidade visual</button>
-                <button data-port="campaign">Campanhas</button>
-                <button data-port="social-media">Social Media</button>
-                <button data-port="web-design">Web Design</button>
+                <div class="menu-options">
+                    <button class="selected" data-port="all">Todos os projetos</button>
+                    <button class="hidden" data-port="visual-id">Identidade visual</button>
+                    <button class="hidden" data-port="campaign">Campanhas</button>
+                    <button class="hidden" data-port="social-media">Social Media</button>
+                    <button class="hidden" data-port="web-design">Web Design</button>
+                </div>
+                <button class="open"></button>
             </nav>
             <div class="works">
                 <ul>
-                    <li class="work"><img src="./img/portfolio/work_1.svg" alt=""></li>
-                    <li class="work"><img src="./img/portfolio/work_2.svg" alt=""></li>
-                    <li class="work"><img src="./img/portfolio/work_3.svg" alt=""></li>
-                    <li class="work"><img src="./img/portfolio/work_4.svg" alt=""></li>
-                    <li class="work"><img src="./img/portfolio/work_5.svg" alt=""></li>
-                    <li class="work"><img src="./img/portfolio/work_6.svg" alt=""></li>
-                    <li class="work"><img src="./img/portfolio/work_7.svg" alt=""></li>
-                    <li class="work"><img src="./img/portfolio/work_8.svg" alt=""></li>
-                    <li class="work"><img src="./img/portfolio/work_9.svg" alt=""></li>
-                    <li class="work"><img src="./img/portfolio/work_10.svg" alt=""></li>
+                    <li data-port="campaign" class="work"><img src="./img/portfolio/work_1.svg" alt=""></li>
+                    <li data-port="campaign" class="work"><img src="./img/portfolio/work_2.svg" alt=""></li>
+                    <li data-port="social-media" class="work"><img src="./img/portfolio/work_3.svg" alt=""></li>
+                    <li data-port="social-media" class="work"><img src="./img/portfolio/work_4.svg" alt=""></li>
+                    <li data-port="visual-id" class="work"><img src="./img/portfolio/work_5.svg" alt=""></li>
+                    <li data-port="visual-id" class="work"><img src="./img/portfolio/work_6.svg" alt=""></li>
+                    <li data-port="social-media" class="work"><img src="./img/portfolio/work_7.svg" alt=""></li>
+                    <li data-port="social-media" class="work"><img src="./img/portfolio/work_8.svg" alt=""></li>
+                    <li data-port="web-design" class="work"><img src="./img/portfolio/work_9.svg" alt=""></li>
+                    <li data-port="web-design" class="work"><img src="./img/portfolio/work_10.svg" alt=""></li>
                 </ul>
             </div>
         </div>
