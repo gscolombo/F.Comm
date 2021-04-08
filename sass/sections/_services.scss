@@ -21,14 +21,26 @@
         }
     }
     .item {
+        user-select: none;
+        position: relative;
         margin: 0 10px;
         min-width: calc(33.3% - 20px);
         display: flex;
+        transition: all 0.25s ease-out;
         @include media-querie('tablet') {
             min-width: calc(50% - 20px);
         }
         @include media-querie('mobile') {
             min-width: calc(100% - 20px);
+        }
+        &.shifted {
+            animation: moveLeft 0.5s;
+        }
+        &.move {
+            animation: moveLeft 0.3s 0.5s;
+        }
+        &.inserted {
+            animation: moveRight 0.5s;
         }
         .item-content {
             background: $dark-blue;
@@ -44,6 +56,7 @@
         }
         img {
             margin: 0 auto;
+            user-select: none;
         }
         h4 {
             text-transform: uppercase;

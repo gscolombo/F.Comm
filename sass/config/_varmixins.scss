@@ -56,6 +56,7 @@ $x-large: 1920px;
         min-width: 100%;
         margin: 0 auto;
         .slide {
+            user-select: none;
             display: flex;
             margin: 0 auto;
             width: 80%;
@@ -66,7 +67,7 @@ $x-large: 1920px;
             }
         }
         .custom-scrollbar {
-            max-width: 112px;
+            max-width: 100px;
             margin: 40px auto 0 auto;
             display: flex;
             justify-content: center;
@@ -74,7 +75,9 @@ $x-large: 1920px;
             position: relative;
             .thumb {
                 position: absolute;
+                padding: 10px 0;
                 left: 0;
+                cursor: pointer;
             }
         }
     }

@@ -17,7 +17,7 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        transition: all 0.3s;
+        transition: all 0.3s ease-out;
         @include media-querie('mobile') {
             min-width: calc(33.3% - 20px);
         }
