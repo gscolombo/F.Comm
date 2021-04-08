@@ -472,7 +472,7 @@ footer .social-media-links img {
 .home {
   position: relative;
   min-height: 100vh;
-  background-image: url(img/home/bg-home.png);
+  background-image: url(/img/home/bg.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -703,7 +703,7 @@ footer .social-media-links img {
 }
 
 .services {
-  background-image: url(img/services/bg-services.png);
+  background-image: url(/img/services/bg.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
