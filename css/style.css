@@ -703,7 +703,7 @@ footer .social-media-links img {
 }
 
 .services {
-  background-image: url("/img/services/bg-services.png");
+  background-image: url(img/services/bg-services.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
