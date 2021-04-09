@@ -83,16 +83,17 @@
                              "f g h i j";
         gap: 20px;
         .hidden {
-            transform: scale3d(0, 0, 0);
+            transform: scale(0);
+            
         }
         .waiting {
-            transform: scale3d(0, 0, 0);
+            transform: scale(0);
             &:hover {
                 transform: none;
             }
         }
         .selected {
-            animation: grow 0.5s;
+            animation: grow 0.3s;
         }
         @include media-querie('mobile'){
             grid-template-columns: 1fr 1fr;
@@ -103,7 +104,7 @@
                                  "i j";
         }
         li {
-            transition: all 0.5s;
+            transition: all 0.3s;
             cursor: pointer;
             &:hover {
                 transform: scale3d(1.1, 1.1, 1.1);

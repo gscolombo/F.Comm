@@ -52,6 +52,7 @@ export default function gridMenu(){
 
         const btn = event.currentTarget;
         btn.classList.add('selected');
+        btn.removeAttribute('disabled');
 
         works.forEach(work => {
             if (btn.getAttribute('data-port') !== 'all') {
@@ -63,14 +64,15 @@ export default function gridMenu(){
         options.forEach(btn => {
             if (!btn.classList.contains('selected')){
                 btn.classList.add('hidden');
+                btn.setAttribute('disabled', 'true');
             }
         });
         openBtn.classList.remove('active');
         
-        timer(selectItems, [btn, 'data-port'], 500);
+        timer(selectItems, [btn, 'data-port'], 300);
 
         if (btn.getAttribute('data-port') !== 'all') {
-            timer(sortItems, '', 500);
+            timer(sortItems, '', 300);
         }
     }
 
