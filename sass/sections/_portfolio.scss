@@ -28,7 +28,7 @@
                     padding: 0;
                     margin: 0;
                     opacity: 0;
-                    transition-duration: 0.12s;
+                    transition: all 0.2s ease-out;
                 }
             }
             .open {
@@ -41,7 +41,7 @@
                 border-left: 10px solid transparent;
                 border-top: 10px solid $pink;
                 border-bottom: 0px solid transparent;
-                transition: all 0.3s;
+                transition: all 0.3s ease-out;
                 &:hover {
                     background: transparent;
                 }
@@ -61,7 +61,7 @@
             border-radius: 100px;
             @include typo(14, 700);
             color: $dark-blue;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
             @include media-querie('mobile'){
                 margin: 5px 0;
             }

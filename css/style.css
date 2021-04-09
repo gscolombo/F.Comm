@@ -441,7 +441,7 @@ footer .social-media-links img {
 .home {
   position: relative;
   min-height: 100vh;
-  background-image: url(/img/home/bg.png) !important;
+  background-image: url(/img/home/bg.svg) !important;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -672,7 +672,7 @@ footer .social-media-links img {
 }
 
 .services {
-  background-image: url(/img/services/bg.png) !important;
+  background-image: url(/img/services/bg.svg) !important;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -828,7 +828,7 @@ footer .social-media-links img {
     padding: 0;
     margin: 0;
     opacity: 0;
-    transition-duration: 0.12s;
+    transition: all 0.2s ease-out;
   }
   .list nav .open {
     display: block;
@@ -840,7 +840,7 @@ footer .social-media-links img {
     border-left: 10px solid transparent;
     border-top: 10px solid #DD5B57;
     border-bottom: 0px solid transparent;
-    transition: all 0.3s;
+    transition: all 0.3s ease-out;
   }
   .list nav .open:hover {
     background: transparent;
@@ -863,7 +863,7 @@ footer .social-media-links img {
   font-weight: 700;
   line-height: 18.2px;
   color: #263147;
-  transition: all 0.3s;
+  transition: all 0.2s ease;
 }
 @media (max-width: 767px) {
   .list nav button {

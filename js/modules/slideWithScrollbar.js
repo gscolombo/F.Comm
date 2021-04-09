@@ -224,7 +224,6 @@ export default class SlideWithScrollbar{
         setTimeout(() => {
           this.slideConfig();
           this.scrollbarConfig();
-          console.log(this.scrollbarPositions);
           this.changeSlide(this.index.current);
         }, 800);
     }
