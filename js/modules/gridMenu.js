@@ -47,12 +47,12 @@ export default function gridMenu(){
     function select(event){
         options.forEach(btn => {
             btn.classList.remove('selected', 'hidden');
+            btn.removeAttribute('disabled');
             btn.removeEventListener(event.type, select);
         });
 
         const btn = event.currentTarget;
         btn.classList.add('selected');
-        btn.removeAttribute('disabled');
 
         works.forEach(work => {
             if (btn.getAttribute('data-port') !== 'all') {
