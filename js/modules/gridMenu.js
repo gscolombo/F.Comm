@@ -47,7 +47,7 @@ export default function gridMenu(){
     function select(event){
         options.forEach(btn => {
             btn.classList.remove('selected', 'hidden');
-            btn.removeAttribute('disabled');
+            btn.setAttribute('disabled', 'false');
             btn.removeEventListener(event.type, select);
         });
 
