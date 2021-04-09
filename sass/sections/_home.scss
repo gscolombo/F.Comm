@@ -1,7 +1,7 @@
 .home {
     position: relative;
     min-height: 100vh;
-    background-image: url(/img/home/bg.png);
+    background-image: url(/img/home/bg.png) !important;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;

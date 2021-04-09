@@ -720,6 +720,7 @@ footer .social-media-links img {
   padding: 10px 0;
   left: 0;
   cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 @media (max-width: 767px) {
   .services .slide {
@@ -951,6 +952,7 @@ footer .social-media-links img {
   padding: 10px 0;
   left: 0;
   cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 @media (max-width: 767px) {
   .clients .slide {
@@ -1017,6 +1019,7 @@ footer .social-media-links img {
   padding: 10px 0;
   left: 0;
   cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 .social-media .slide {
   padding-bottom: 10px;

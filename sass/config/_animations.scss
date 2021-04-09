@@ -33,19 +33,3 @@
         transform: translate3d(calc(-100% - 20px), 0, 0);
     }
 }
-
-@keyframes moveRight {
-    from {
-        transform: translate3d(calc(+100% + 20px), 0, 0);
-    } to {
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-@keyframes moveLeft {
-    from {
-        transform: translate3d(0, 0, 0);
-    } to {
-        transform: translate3d(calc(-100% - 20px), 0, 0);
-    }
-}

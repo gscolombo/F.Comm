@@ -20,6 +20,77 @@ export default class Slide {
         this.mouseMove = this.mouseMove.bind(this);
     }
 
+    mouseDown(event){
+        event.preventDefault();
+        const target = event.currentTarget;
+        const type = event.type;
+
+        this.moveEvents.forEach(event => {
+            target.addEventListener(event, this.mouseMove);
+        })
+
+        if (target !== this.scrollbar) {
+            this.mousePos.initial = type !== 'touchstart' ? event.clientX : event.touches[0].clientX;
+        } else {
+            this.scrollbarPos.initial = type !== 'touchstart' ? event.clientX : event.touches[0].clientX;
+        }
+    }
+
+    mouseMove(event){
+        event.preventDefault();
+        const target = event.target;
+        const mouseX = event.type !== 'touchmove' ? event.clientX : event.touches[0].clientX;
+
+        let mousePos;
+        let scrollbarPos;
+
+        if (target !== this.scrollbar){
+            mousePos = this.calcDistance(mouseX, target);
+        } else {
+            scrollbarPos = this.calcDistance(mouseX, target);
+        }
+
+        const scrollLength = this.responsiveThreshold();
+
+        if (target !== this.scrollbar) {
+            const scrollbarFactor = (mousePos.current / scrollLength) * 50;
+  
+
+            this.translate(mousePos.current, this.items);
+            this.translate(scrollbarFactor, this.scrollbar);
+            this.scrollbarPos.current = scrollbarFactor;
+        } else {
+            const slideFactor = (scrollbarPos.current / 50) * scrollLength;
+
+            this.translate(slideFactor, this.items);
+            this.translate(scrollbarPos.current, this.scrollbar);
+            this.mousePos.current = slideFactor;
+        }
+    }
+
+    mouseUp(event){
+        event.preventDefault();
+        const target = event.currentTarget;
+        const width = this.items[0].clientWidth + this.gutter;
+        const factor = ((innerWidth - width) / 2);
+       
+
+        this.moveEvents.forEach(event => {
+            target.removeEventListener(event, this.mouseMove);
+        })
+        
+        console.log(this.index);
+
+        this.items.forEach((item, index) => {
+            this.checkPosition(index);
+            console.log(this.position);
+        })
+
+        // this.restrictMovement(target);
+
+    }
+
+    // Configurações
     setThreshold(array, gutter, firstIndex, lastIndex) {
         let scrollLength = 0;
         array.forEach((item, index) => {
@@ -49,14 +120,22 @@ export default class Slide {
     }
 
     configPositions(){
-        this.positions = [];
-        this.items.forEach((item, index) => {
+        this.index = [];
+        this.items.forEach((item) => {
             const position = {
-                index: index,
+                item: item,
                 position: -item.getBoundingClientRect().x,
             };
-            this.positions.push(position);
+            this.index.push(position);
         });
+    }
+
+    checkPosition(index){
+        this.position = {
+            prev: index !== 0 ? index - 1 : null,
+            current: index,
+            next: index + 1 !== null ? index + 1 : null,
+        }
     }
 
     restrictMovement(target){
@@ -120,77 +199,6 @@ export default class Slide {
         } else {
             element.style.transform = `translateX(${distance}px)`;
         }
-    }
-
-    mouseDown(event){
-        const target = event.currentTarget;
-        const type = event.type;
-
-        this.moveEvents.forEach(event => {
-            target.addEventListener(event, this.mouseMove);
-        })
-
-        if (target !== this.scrollbar) {
-            this.mousePos.initial = type !== 'touchstart' ? event.clientX : event.touches[0].clientX;
-        } else {
-            this.scrollbarPos.initial = type !== 'touchstart' ? event.clientX : event.touches[0].clientX;
-        }
-    }
-
-    mouseMove(event){
-        event.preventDefault();
-        const target = event.target;
-        const mouseX = event.type !== 'touchmove' ? event.clientX : event.touches[0].clientX;
-
-        let mousePos;
-        let scrollbarPos;
-
-        if (target !== this.scrollbar){
-            mousePos = this.calcDistance(mouseX, target);
-        } else {
-            scrollbarPos = this.calcDistance(mouseX, target);
-        }
-
-        const scrollLength = this.responsiveThreshold();
-
-        if (target !== this.scrollbar) {
-            const scrollbarFactor = (mousePos.current / scrollLength) * 50;
-  
-
-            this.translate(mousePos.current, this.items);
-            this.translate(scrollbarFactor, this.scrollbar);
-            this.scrollbarPos.current = scrollbarFactor;
-        } else {
-            const slideFactor = (scrollbarPos.current / 50) * scrollLength;
-
-            this.translate(slideFactor, this.items);
-            this.translate(scrollbarPos.current, this.scrollbar);
-            this.mousePos.current = slideFactor;
-        }
-    }
-
-    mouseUp(event){
-        const target = event.currentTarget;
-        const width = this.items[0].clientWidth + this.gutter;
-        const factor = ((innerWidth - width) / 2);
-
-      
-       
-
-        // this.translate(-328.75 + ((innerWidth - width) / 2), this.items);
-
-        this.moveEvents.forEach(event => {
-            target.removeEventListener(event, this.mouseMove);
-        })
-
-        this.restrictMovement(target);
-
-        this.positions.forEach((obj) => {
-            if (this.mousePos.last <= (obj.position * 0.25)){
-                this.translate(obj.position + factor, this.items);
-                console.log(this.mousePos);
-            }
-        }) 
     }
 
     addEvents(){
