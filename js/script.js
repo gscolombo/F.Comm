@@ -3,6 +3,7 @@ import AnimateOnScroll from './modules/animateOnScroll.js'
 import DinamicScroll from './modules/dinamicScroll.js';
 import gridMenu from './modules/gridMenu.js';
 import Slide from './modules/slide.js';
+// import SlideWithScrollbar from './modules/slideWithScrollbar.js';
 
 const animateOnScroll = new AnimateOnScroll('section', '[data-js="animate"]');
 animateOnScroll.init();
@@ -13,6 +14,9 @@ dinamicScroll.init();
 menuControl();
 
 gridMenu();
+
+// const slide = new SlideWithScrollbar('.services .slide', '.custom-scrollbar .thumb');
+// slide.init();
 
 const mobileServices = {firstIndex: 0, lastIndex: 0};
 const tabletServices = {firstIndex: 0, lastIndex: 1};

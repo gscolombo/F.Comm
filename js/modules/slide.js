@@ -5,8 +5,8 @@ export default class Slide {
 
         this.gutter = gutter;
         this.mobile = mobile;
-        this.tablet = {...tablet};
-        this.desktop = {...desktop};
+        this.tablet = tablet;
+        this.desktop = desktop;
         
         this.startEvents = ['mousedown', 'touchstart'];
         this.moveEvents = ['mousemove', 'touchmove'];
@@ -37,15 +37,26 @@ export default class Slide {
         const tablet = this.tablet;
         const desktop = this.desktop;
 
-        if (innerWidth > 960) {
-            threshold =this.setThreshold(this.items, this.gutter, desktop.firstIndex, desktop.lastIndex);
-        } else if (innerWidth < 960 && innerWidth > 768) {
-            threshold =this.setThreshold(this.items, this.gutter, tablet.firstIndex, tablet.lastIndex);
-        } else if (innerWidth < 768) {
-            threshold =this.setThreshold(this.items, this.gutter, mobile.firstIndex, mobile.lastIndex);
+        if (window.innerWidth >= 960) {
+            threshold = this.setThreshold(this.items, this.gutter, desktop.firstIndex, desktop.lastIndex);
+        } else if (window.innerWidth < 960 && window.innerWidth >= 768) {
+            threshold = this.setThreshold(this.items, this.gutter, tablet.firstIndex, tablet.lastIndex);
+        } else if (window.innerWidth < 768) {
+            threshold = this.setThreshold(this.items, this.gutter, mobile.firstIndex, mobile.lastIndex);
         }
 
         return threshold;
+    }
+
+    configPositions(){
+        this.positions = [];
+        this.items.forEach((item, index) => {
+            const position = {
+                index: index,
+                position: -item.getBoundingClientRect().x,
+            };
+            this.positions.push(position);
+        });
     }
 
     restrictMovement(target){
@@ -86,8 +97,10 @@ export default class Slide {
 
     calcDistance(length, target){
         const distance = length;
+
         this.mousePos.distance = -(this.mousePos.initial - distance);
         this.scrollbarPos.distance = -(this.scrollbarPos.initial - distance);
+        
 
         this.mousePos.current = this.mousePos.distance + this.mousePos.last;
         this.scrollbarPos.current = (this.scrollbarPos.distance) + this.scrollbarPos.last;
@@ -128,7 +141,7 @@ export default class Slide {
         event.preventDefault();
         const target = event.target;
         const mouseX = event.type !== 'touchmove' ? event.clientX : event.touches[0].clientX;
-    
+
         let mousePos;
         let scrollbarPos;
 
@@ -142,6 +155,7 @@ export default class Slide {
 
         if (target !== this.scrollbar) {
             const scrollbarFactor = (mousePos.current / scrollLength) * 50;
+  
 
             this.translate(mousePos.current, this.items);
             this.translate(scrollbarFactor, this.scrollbar);
@@ -157,12 +171,26 @@ export default class Slide {
 
     mouseUp(event){
         const target = event.currentTarget;
+        const width = this.items[0].clientWidth + this.gutter;
+        const factor = ((innerWidth - width) / 2);
+
+      
+       
+
+        // this.translate(-328.75 + ((innerWidth - width) / 2), this.items);
 
         this.moveEvents.forEach(event => {
             target.removeEventListener(event, this.mouseMove);
         })
 
         this.restrictMovement(target);
+
+        this.positions.forEach((obj) => {
+            if (this.mousePos.last <= (obj.position * 0.25)){
+                this.translate(obj.position + factor, this.items);
+                console.log(this.mousePos);
+            }
+        }) 
     }
 
     addEvents(){
@@ -182,6 +210,7 @@ export default class Slide {
     init() {
         if (this.slide) {
             this.items = [...this.slide.children];
+            this.configPositions();
             this.addEvents();
         }   
     }
