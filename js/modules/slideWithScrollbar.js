@@ -156,9 +156,7 @@ export default class SlideWithScrollbar{
 
         if (event.currentTarget === this.slide) {
             this.scrollbar.removeEventListener('mouseleave', this.end);
-            if (event.type === 'mouseup') {
-                this.changeSlideOnEnd();
-            }
+            this.changeSlideOnEnd();
         } else {
             this.resetIndexAfterScrolling();
             this.limitScrolling();
