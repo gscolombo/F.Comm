@@ -1,19 +1,21 @@
 export default class SlideWithScrollbar{
-    constructor(slide, scrollbar, gutter, mobileFactor, tabletFactor, desktopFactor){
+    constructor(slide, scrollbar, gutter, mobile, tablet, desktop, scrollFactor = 1){
         this.slide = document.querySelector(slide);
         this.scrollbar = this.slide.parentElement.querySelector(scrollbar);
         this.movement = {start: 0, final: 0, distance: 0, finalScrollbarPos: 0};
 
-        this.mobileFactor = mobileFactor;
-        this.tabletFactor = tabletFactor;
-        this.desktopFactor = desktopFactor;
+        this.mobile= mobile;
+        this.tablet= tablet;
+        this.desktop= desktop;
+
+        this.scrollFactor = scrollFactor;
 
         if (innerWidth < 768) {
-            this.gutter = gutter * this.mobileFactor;
+            this.gutter = gutter * this.mobile;
         } else if (innerWidth < 960 && innerWidth >= 768) {
-            this.gutter = gutter * this.tabletFactor;
+            this.gutter = gutter * this.tablet;
         } else if (innerWidth >= 960) {
-            this.gutter = this.gutter * this.desktopFactor;
+            this.gutter = gutter * this.desktop;
         }
     }
 
@@ -40,6 +42,13 @@ export default class SlideWithScrollbar{
     }
 
     moveScrollbarWithIndex(index){
+        const threshold = this.setThreshold();
+        const lastPosition = this.items.length - (threshold - 1);
+        
+        if (index === lastPosition){
+            index = index - 1;
+        };
+
         this.movement.finalScrollbarPos = this.scrollbarPositions[index];
         this.scrollbar.style.transform = `translate3d(${this.scrollbarPositions[index]}px, 0, 0)`;
     }
@@ -59,16 +68,29 @@ export default class SlideWithScrollbar{
         } else if (this.movement.lastScrollbarPos >= this.scrollbar.clientWidth) {
             this.scrollbar.style.transform = `translate3d(${this.scrollbar.clientWidth}px, 0, 0)`;
             this.movement.lastScrollbarPos = this.scrollbar.clientWidth;
-            this.movement.lastPos = this.items[this.items.length - 1].position;
-            this.scrollSlide(this.items[this.items.length - 1].position);
+
+            let factor;
+            if (innerWidth < 768) {
+                factor = this.mobile;
+            } else if (innerWidth < 960 && innerWidth >= 768) {
+                factor = this.tablet;
+            } else if (innerWidth >= 960) {
+                factor= this.desktop;
+            }
+
+            this.movement.lastPos = this.items[this.items.length - factor].position;
+            this.movement.final = this.movement.lastPos;
+            this.scrollSlide(this.items[this.items.length - factor].position);
         }
     }
 
     resetIndexAfterScrolling(){
         const slideWidth = this.items[this.items.length - 1].position;
+        const itemWidth = this.items[0].item.clientWidth / 2;
+
         const distance = Math.floor((this.movement.lastScrollbarPos / this.scrollbar.clientWidth) * slideWidth);
-        const upperLimit = Math.floor(distance + (this.items[0].item.clientWidth / 2));
-        const lowerLimit = Math.floor(distance - (this.items[0].item.clientWidth / 2));
+        const upperLimit = Math.floor(distance + (itemWidth / 2));
+        const lowerLimit = Math.floor(distance - (itemWidth / 2));
         
         this.items.forEach(obj => {
             if (obj.position < upperLimit && obj.position > lowerLimit) {
@@ -80,6 +102,16 @@ export default class SlideWithScrollbar{
         });
 
         this.limitScrolling();
+    }
+
+    convertDistances(){
+        const slideWidth = this.items[this.items.length - 1].position;
+        const factor = ((this.movement.finalScrollbarPos - this.movement.distance )/ this.scrollbar.clientWidth);
+        
+        this.movement.lastPos = Math.floor((this.movement.lastScrollbarPos / this.scrollbar.clientWidth) * slideWidth);
+        this.movement.final = this.movement.lastPos;
+
+        return Math.floor(factor * slideWidth);
     }
 
     start(event){
@@ -95,9 +127,8 @@ export default class SlideWithScrollbar{
 
        this.slide.addEventListener(type, this.move);
        this.scrollbar.addEventListener(type, this.move);
-       this.scrollbar.addEventListener('mouseleave', this.end);
 
-       if (event.currentTarget === this.slide) this.slide.classList.add('selected');
+       if (event.currentTarget === this.scrollbar) this.scrollbar.addEventListener('mouseleave', this.end);
     }
 
     move(event){
@@ -119,90 +150,103 @@ export default class SlideWithScrollbar{
     end(event){
         event.preventDefault();
         const type = event.type === 'mouseup' || event.type === 'mouseleave' ? 'mousemove' : 'touchmove';
+        
         this.slide.removeEventListener(type, this.move);
         this.scrollbar.removeEventListener(type, this.move);
 
         if (event.currentTarget === this.slide) {
-            this.changeSlideOnEnd();
+            this.scrollbar.removeEventListener('mouseleave', this.end);
+            if (event.type === 'mouseup') {
+                this.changeSlideOnEnd();
+            }
         } else {
             this.resetIndexAfterScrolling();
+            this.limitScrolling();
             this.movement.finalScrollbarPos = this.movement.lastScrollbarPos;
+            this.movement.final = this.movement.lastPos;
         }
-        
-        this.slide.classList.remove('selected');
-    
-    }
-
-    convertDistances(){
-        const slideWidth = this.items[this.items.length - 1].position;
-        const factor = ((this.movement.finalScrollbarPos - this.movement.distance )/ this.scrollbar.clientWidth);
-        
-        this.movement.lastPos = Math.floor((this.movement.lastScrollbarPos / this.scrollbar.clientWidth) * slideWidth);
-        this.movement.final = this.movement.lastPos;
-
-        return Math.floor(factor * slideWidth);
     }
 
     changeSlideOnEnd(){
-        let threshold;
-       
-        if (innerWidth < 768) {
-            threshold = this.index.next !== null;
-        } else if (innerWidth >= 768 && innerWidth < 960) {
-            threshold = this.index.next !== this.items.length - 1;
-        } else if (innerWidth >= 960) {
-            threshold = this.index.next !== this.items.length - 2;
-        }
-
-        if (this.movement.distance > 100 && threshold){
-            this.changeSlide(this.index.next);
-        } else if (this.movement.distance < -100 && this.index.prev !== null){
-            this.changeSlide(this.index.prev);
+        if (this.movement.distance > 50 && this.index.next !== null){
+            if (this.index.next <= this.index.last) {
+                this.changeSlide(this.index.next);
+            } else {
+                this.changeSlide(this.index.last);
+            }
+        } else if (this.movement.distance < -50 && this.index.prev !== null){
+            if (this.index.prev > 0) {
+                this.changeSlide(this.index.prev);
+            } else {
+                this.changeSlide(0);
+            }
         } else {
             this.changeSlide(this.index.current);
         }
     }
 
     // Configurações do slide
+
+    setThreshold(gutter){
+        let threshold;
+        
+        if (innerWidth < 768) {
+            threshold = this.mobile;
+        } else if (innerWidth >= 768 && innerWidth < 960) {
+            threshold = this.tablet;
+        } else if (innerWidth >= 960) {
+            threshold = this.desktop;
+        }
+        return threshold;
+    }
+
     slideConfig() {
-        this.items = [...this.slide.children].map((item, index) => {
-            let offset;
-            if (innerWidth < 768) {
-                offset = -item.offsetLeft + ((innerWidth - (item.offsetWidth * 1) - 20) / 2);
-            } else if (innerWidth >= 768 && innerWidth < 960){
-                offset = -item.offsetLeft + ((innerWidth - (item.offsetWidth * 2) - 40) / 2);
-            } else if (innerWidth >= 960) {
-                offset = -item.offsetLeft + ((innerWidth - (item.offsetWidth * 3) - 60) / 2);
+        let offset;
+        const threshold = this.setThreshold();
+
+        this.items = [...this.slide.children].map((item, index, array) => {
+            if (index <= (array.length - threshold)) {
+                if (innerWidth < 768) {
+                    offset = Math.floor(-item.offsetLeft + ((innerWidth - (item.offsetWidth * this.mobile) - this.gutter) / 2));
+                } else if (innerWidth >= 768 && innerWidth < 960){
+                    offset = Math.floor(-item.offsetLeft + ((innerWidth - (item.offsetWidth * this.tablet) - this.gutter) / 2));
+                } else if (innerWidth >= 960) {
+                    offset = Math.floor(-item.offsetLeft + ((innerWidth - (item.offsetWidth * this.desktop) - this.gutter) / 2));
+                }
             }
+            
             return { item, index, position: offset};
         });
     }
 
     scrollbarConfig(){
-        let factor = 0;
-        this.scrollbarPositions = this.items.map((obj, index, array) => {
-            if (index !== 0) {
-                if (innerWidth < 768) {
-                    return factor += this.scrollbar.clientWidth / (this.items.length - 1);
-                } else if (innerWidth >= 768 && innerWidth < 960) {
-                    if (index <= array.length - 2)
-                        return factor += Math.floor(this.scrollbar.clientWidth / (this.items.length - 2));
-                } else if (innerWidth >= 960) {
-                    if (index <= array.length - 3)
-                        return factor += Math.floor(this.scrollbar.clientWidth / (this.items.length - 3));
-                }
-            }   
-            else return factor = 0; 
-        });
+        const threshold = this.setThreshold();
+        const factor = this.items.length - threshold;
+
+        this.scrollbarPositions = [];
+        const distance = Math.fround(this.scrollbar.clientWidth / factor);
+        let position = 0;
+        for (let i = 0; i < this.items.length - (threshold - 1); i++){
+            this.scrollbarPositions.push(position);
+            position += distance;
+        }
     }
 
     setIndexPosition(index){
-        const lastIndex = this.items.length - 1;
+        const threshold = this.setThreshold();
+        let lastIndex;
+       
+        if (this.scrollFactor !== 0) {
+            lastIndex = this.items.length - (threshold - 1);
+        } else {
+            lastIndex = this.items.length - 1;
+        }
 
         this.index = {
-            prev: index ? index - 1 : null,
+            prev: index ? index - this.scrollFactor : null,
             current: index,
-            next: index === lastIndex ? null : index + 1,
+            next: index === lastIndex ? null : index + this.scrollFactor,
+            last: lastIndex,
         };
     }
 
@@ -254,11 +298,10 @@ export default class SlideWithScrollbar{
 
     init(){
         if (this.slide){
-            this.threshold = this.slide.scrollWidth;
-            this.bindEvents();
-            this.addEvents();
             this.slideConfig();
             this.scrollbarConfig();
+            this.bindEvents();
+            this.addEvents();
             this.changeSlide(0);
         }
     }
