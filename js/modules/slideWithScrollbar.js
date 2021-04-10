@@ -4,19 +4,20 @@ export default class SlideWithScrollbar{
         this.scrollbar = this.slide.parentElement.querySelector(scrollbar);
         this.movement = {start: 0, final: 0, distance: 0, finalScrollbarPos: 0};
 
+        this.gutter = gutter;
         this.mobile= mobile;
         this.tablet= tablet;
         this.desktop= desktop;
 
         this.scrollFactor = scrollFactor;
 
-        if (innerWidth < 768) {
-            this.gutter = gutter * this.mobile;
-        } else if (innerWidth < 960 && innerWidth >= 768) {
-            this.gutter = gutter * this.tablet;
-        } else if (innerWidth >= 960) {
-            this.gutter = gutter * this.desktop;
-        }
+        // if (innerWidth < 768) {
+        //      * this.mobile;
+        // } else if (innerWidth < 960 && innerWidth >= 768) {
+        //     this.gutter = gutter * this.tablet;
+        // } else if (innerWidth >= 960) {
+        //     this.gutter = gutter * this.desktop;
+        // }
     }
 
     calcMovement(clientX, target = this.slide){
@@ -163,14 +164,20 @@ export default class SlideWithScrollbar{
             this.movement.finalScrollbarPos = this.movement.lastScrollbarPos;
             this.movement.final = this.movement.lastPos;
         }
+
+        
     }
 
     changeSlideOnEnd(){
         if (this.movement.distance > 50 && this.index.next !== null){
-            if (this.index.next <= this.index.last) {
+            if (this.index.next < this.index.last) {
                 this.changeSlide(this.index.next);
             } else {
-                this.changeSlide(this.index.last);
+                if (!(this.index.current < this.index.last)) {
+                    this.changeSlide(this.index.current);
+                } else {
+                    this.changeSlide(this.index.last - 1)
+                }
             }
         } else if (this.movement.distance < -50 && this.index.prev !== null){
             if (this.index.prev > 0) {
@@ -205,14 +212,13 @@ export default class SlideWithScrollbar{
         this.items = [...this.slide.children].map((item, index, array) => {
             if (index <= (array.length - threshold)) {
                 if (innerWidth < 768) {
-                    offset = Math.floor(-item.offsetLeft + ((innerWidth - (item.offsetWidth * this.mobile) - this.gutter) / 2));
+                    offset = Math.floor(-item.offsetLeft + ((innerWidth - ((item.offsetWidth + this.gutter) * this.mobile)) / 2));
                 } else if (innerWidth >= 768 && innerWidth < 960){
-                    offset = Math.floor(-item.offsetLeft + ((innerWidth - (item.offsetWidth * this.tablet) - this.gutter) / 2));
+                    offset = Math.floor(-item.offsetLeft + ((innerWidth - ((item.offsetWidth + this.gutter) * this.tablet)) / 2));
                 } else if (innerWidth >= 960) {
-                    offset = Math.floor(-item.offsetLeft + ((innerWidth - (item.offsetWidth * this.desktop) - this.gutter) / 2));
+                    offset = Math.floor(-item.offsetLeft + ((innerWidth - ((item.offsetWidth + this.gutter) * this.desktop)) / 2));
                 }
             }
-            
             return { item, index, position: offset};
         });
     }
@@ -237,7 +243,7 @@ export default class SlideWithScrollbar{
         if (this.scrollFactor !== 0) {
             lastIndex = this.items.length - (threshold - 1);
         } else {
-            lastIndex = this.items.length - 1;
+            lastIndex = this.items.length - threshold;
         }
 
         this.index = {
@@ -249,17 +255,19 @@ export default class SlideWithScrollbar{
     }
 
     changeSlide(index){
-        const current = this.items[index];
+        if (index < this.items.length){
+            const current = this.items[index];
 
-        this.moveSlide(current.position);
-        this.moveScrollbarWithIndex(index);
-        this.setIndexPosition(index);
-        this.movement.final = current.position;
-
-        const slideWidth = this.items[this.items.length - 1].position;
-        this.movement.finalScrollbarPos = (current.position / slideWidth) * this.scrollbar.clientWidth;
-
-        return index;
+            this.moveSlide(current.position);
+            this.moveScrollbarWithIndex(index);
+            this.setIndexPosition(index);
+            this.movement.final = current.position;
+    
+            const slideWidth = this.items[this.items.length - 1].position;
+            this.movement.finalScrollbarPos = (current.position / slideWidth) * this.scrollbar.clientWidth;
+    
+            return index;
+        }
     }
     
     onWindowResize() {

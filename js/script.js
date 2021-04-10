@@ -15,11 +15,11 @@ menuControl();
 gridMenu();
 
 const scrollbar = '.custom-scrollbar .thumb';
-const servicesSlide = new SlideWithScrollbar('.services .slide', scrollbar, 20, 1, 2, 3);
+const servicesSlide = new SlideWithScrollbar('.services .slide', scrollbar, 10, 1, 2, 3);
 servicesSlide.init();
 
 const clientsSlide = new SlideWithScrollbar('.clients .slide', scrollbar, 20, 3, 5, 5, 3);
 clientsSlide.init();
 
-const socialMediaSlide = new SlideWithScrollbar('.social-media .slide', scrollbar, 40, 1, 2, 3);
+const socialMediaSlide = new SlideWithScrollbar('.social-media .slide', scrollbar, 20, 1, 2, 3);
 socialMediaSlide.init();
