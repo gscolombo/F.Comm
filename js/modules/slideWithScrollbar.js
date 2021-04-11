@@ -80,18 +80,20 @@ export default class SlideWithScrollbar{
         const upperLimit = Math.floor(distance + itemWidth);
         const lowerLimit = Math.floor(distance - itemWidth);
 
-        
+        let scrollIndex;
         this.items.forEach(obj => {
             if (obj.position < upperLimit && obj.position > lowerLimit || obj.position > distance) {
                 if (obj.index === this.index.last) obj.index = obj.index - 1;
                 else obj.index = obj.index;
 
                 this.setIndexPosition(obj.index);
-                setTimeout(() => {
-                    this.changeSlide(obj.index);
-                }, 500);
+                scrollIndex = obj.index;
             }
         });
+
+        setTimeout(() => {
+            this.changeSlide(scrollIndex);
+        }, 500);
     }
 
     convertDistances(){
