@@ -68,7 +68,7 @@ export default class SlideWithScrollbar{
             this.movement.lastScrollbarPos = this.scrollbar.clientWidth;
             this.movement.finalScrollbarPos = this.movement.lastScrollbarPos;
 
-            this.changeSlide(this.index.last - 1);
+            this.setIndexPosition(this.index.last - 1);
         }
     }
 
