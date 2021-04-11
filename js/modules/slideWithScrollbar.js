@@ -260,9 +260,6 @@ export default class SlideWithScrollbar{
             const slideWidth = this.items[this.items.length - 1].position;
             this.movement.finalScrollbarPos = (current.position / slideWidth) * this.scrollbar.clientWidth;
             
-            if (this.movement.lastScrollbarPos > 50) {
-                this.limitScrolling();
-            }
             return index;
         }
     }
