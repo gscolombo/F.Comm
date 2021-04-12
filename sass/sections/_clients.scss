@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    @include media-querie('mobile'){
+        justify-content: flex-start;
+    }
     @include slide;
     .slide {
         @include media-querie('mobile') {

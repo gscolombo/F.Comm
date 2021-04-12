@@ -5,11 +5,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
+    overflow: hidden;
     h1 {
         margin: 37px 0 33px 0;
     }
@@ -79,9 +81,13 @@
 @include unclipFromLeft('line', 100%);
 .cool-line {
     position: absolute;
-    min-width: 100%;
-    height: fit-content;
+    min-width: 100vw;
+    height: 100px;
     bottom: 5%;
+    @include media-querie('mobile'){
+        bottom: 20%;
+        transform: scale3d(2, 2, 2);
+    }
     img {
         position: absolute;
         width: 100%;

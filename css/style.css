@@ -168,9 +168,9 @@ h4 {
 @media (max-width: 767px) {
   h4 {
     font-family: "K2D", sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
-    line-height: 15.6px;
+    line-height: 18.2px;
   }
 }
 
@@ -205,6 +205,11 @@ img {
   max-width: 100%;
 }
 
+@media (max-width: 767px) {
+  section {
+    padding-bottom: 40px;
+  }
+}
 @media (min-width: 1920px) {
   section {
     min-height: 60vh;
@@ -223,6 +228,7 @@ section header {
 @media (max-width: 767px) {
   section header {
     width: 90%;
+    margin: 40px auto;
   }
 }
 section header .bar {
@@ -324,7 +330,7 @@ section header p {
   margin: 0 auto;
   position: relative;
 }
-.menu nav .visible {
+.menu nav [data-js=visible] {
   box-shadow: 0 4px transparent, 0 1.5px white;
 }
 @media (min-width: 768px) and (max-width: 960px) {
@@ -445,11 +451,13 @@ footer .social-media-links img {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: white;
+  overflow: hidden;
 }
 .home h1 {
   margin: 37px 0 33px 0;
@@ -553,11 +561,15 @@ footer .social-media-links img {
 }
 .cool-line {
   position: absolute;
-  min-width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  min-width: 100vw;
+  height: 100px;
   bottom: 5%;
+}
+@media (max-width: 767px) {
+  .cool-line {
+    bottom: 20%;
+    transform: scale3d(2, 2, 2);
+  }
 }
 .cool-line img {
   position: absolute;
@@ -919,6 +931,11 @@ footer .social-media-links img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+@media (max-width: 767px) {
+  .clients {
+    justify-content: flex-start;
+  }
 }
 .clients .slide-container {
   min-width: 100%;

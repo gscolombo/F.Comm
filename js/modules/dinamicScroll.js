@@ -24,9 +24,9 @@ export default class DinamicScroll extends AnimateOnScroll {
         const selector = lastSection + '-opt';
         this.options.forEach(option => {
             if (option.classList.contains(selector)) {
-                option.classList.add('visible');
+                option.setAttribute('data-js', 'visible');
             } else {
-                option.classList.remove('visible');
+                option.removeAttribute('data-js');
             }
         });
     }
@@ -41,7 +41,7 @@ export default class DinamicScroll extends AnimateOnScroll {
         this.getOffsetDistance();
         this.startFunctions = this.startFunctions.bind(this);
         this.options = document.querySelectorAll('.menu nav li a');
-        this.options[0].classList.add('visible');
+        this.options[0].setAttribute('data-js', 'visible');
 
         window.addEventListener('scroll', this.startFunctions);
         return this;

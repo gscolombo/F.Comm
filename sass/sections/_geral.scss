@@ -31,7 +31,7 @@ h3 {
 h4 {
     @include typo(18, 700);
     @include media-querie('mobile') {
-        @include typo(12, 300);
+        @include typo(14, 300);
     }
 }
 
@@ -56,6 +56,9 @@ img {
 }
 
 section {
+    @include media-querie ('mobile'){
+        padding-bottom: 40px;
+    }
     @include media-querie('x-large'){
         min-height: 60vh;
     }
@@ -71,6 +74,7 @@ section header {
     align-items: center;
     @include media-querie('mobile') {
         width: 90%;
+        margin: 40px auto;
     }
     .bar {
         width: 50px;
@@ -153,7 +157,7 @@ section header {
         min-width: 60%;
         margin: 0 auto;
         position: relative;
-        .visible {
+        [data-js='visible'] {
             box-shadow: 0 4px transparent, 0 1.5px white;
         }
         @include media-querie('tablet') {

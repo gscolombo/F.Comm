@@ -5,7 +5,7 @@ export default function menuControl() {
     const menu = document.querySelector('.menu');
     const sandwich = document.querySelector('.sandwich');
     const closeBtn = document.querySelector('.close');
-    const options = document.querySelectorAll('.menu li');
+    const options = document.querySelectorAll('a[class$=-opt]');
     const events = ['click', 'touchstart'];
     
     function openMenu() {
@@ -17,12 +17,11 @@ export default function menuControl() {
         menu.classList.remove('active');
     }
     
-
     function scrollToSection(event){
         event.preventDefault();
         const link = event.currentTarget;
         sections.forEach(section => {
-           if (link.querySelector(`[class^=${section.getAttribute('id')}]`) !== null){
+           if (link.classList.contains((section.getAttribute('id') + '-opt'))){
                 const sectionHeader = section.querySelector('header');
                 if (sectionHeader !== null) {
                     if (!section.classList.contains('services')) {
