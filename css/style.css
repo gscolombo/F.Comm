@@ -228,7 +228,6 @@ section header {
 @media (max-width: 767px) {
   section header {
     width: 90%;
-    margin: 40px auto;
   }
 }
 section header .bar {

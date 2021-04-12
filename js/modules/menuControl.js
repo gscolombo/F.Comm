@@ -26,7 +26,7 @@ export default function menuControl() {
                 if (sectionHeader !== null) {
                     if (!section.classList.contains('services')) {
                         scrollTo({
-                            top: sectionHeader.offsetTop - 120,
+                            top: sectionHeader.offsetTop - 80,
                             left: 0,
                             behavior: 'smooth',
                         });

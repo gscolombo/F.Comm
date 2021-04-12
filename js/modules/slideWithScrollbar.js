@@ -139,7 +139,7 @@ export default class SlideWithScrollbar{
             const distance = this.convertDistances();
             this.scrollSlide(distance);
         } else {
-            if (this.movement.distance > 30 || this.movement.distance < -30)
+            if (this.movement.distance > 10 || this.movement.distance < -10)
                 this.moveSlide(finalPos);
             else {
                 if (event.type === 'touchmove'){
