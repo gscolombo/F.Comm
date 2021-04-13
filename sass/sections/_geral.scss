@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    will-change: scroll-position;
 }
 
 .container {
@@ -104,6 +103,7 @@ section header {
     z-index: 10;
     background-color: transparent;
     transition: all 0.5s;
+    will-change: background-color;
     .sandwich, .close {
         display: none;
     }

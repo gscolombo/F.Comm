@@ -107,7 +107,6 @@ table {
 }
 * {
   box-sizing: border-box;
-  will-change: scroll-position;
 }
 
 .container {
@@ -259,6 +258,7 @@ section header p {
   z-index: 10;
   background-color: transparent;
   transition: all 0.5s;
+  will-change: background-color;
 }
 .menu .sandwich, .menu .close {
   display: none;
@@ -463,6 +463,7 @@ footer .social-media-links img {
   margin: 37px auto 33px auto;
   min-height: 51px;
   text-align: center;
+  will-change: contents;
 }
 .home p {
   margin-bottom: 20px;
@@ -578,7 +579,7 @@ footer .social-media-links img {
   position: absolute;
   width: 100%;
   bottom: 5%;
-  will-change: transform;
+  will-change: clip-path;
 }
 .cool-line img.line {
   -webkit-animation: unclipFromLeft_line 3s forwards;

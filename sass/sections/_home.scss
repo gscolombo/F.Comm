@@ -16,6 +16,7 @@
         margin: 37px auto 33px auto;
         min-height: 51px;
         text-align: center;
+        will-change: contents;
     }
     p {
         margin-bottom: 20px;
@@ -95,7 +96,7 @@
         position: absolute;
         width: 100%;
         bottom: 5%;
-        will-change: transform;
+        will-change: clip-path;
         &.line {
             animation: unclipFromLeft_line 3s forwards;
         }
