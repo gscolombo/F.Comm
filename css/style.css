@@ -107,6 +107,7 @@ table {
 }
 * {
   box-sizing: border-box;
+  will-change: scroll-position;
 }
 
 .container {
@@ -459,7 +460,9 @@ footer .social-media-links img {
   overflow: hidden;
 }
 .home h1 {
-  margin: 37px 0 33px 0;
+  margin: 37px auto 33px auto;
+  min-height: 51px;
+  text-align: center;
 }
 .home p {
   margin-bottom: 20px;
@@ -472,6 +475,7 @@ footer .social-media-links img {
   .home h1 {
     margin-top: 18px;
     margin-bottom: 12px;
+    min-height: 72px;
   }
   .home p {
     margin-bottom: 20px;
@@ -574,6 +578,7 @@ footer .social-media-links img {
   position: absolute;
   width: 100%;
   bottom: 5%;
+  will-change: transform;
 }
 .cool-line img.line {
   -webkit-animation: unclipFromLeft_line 3s forwards;

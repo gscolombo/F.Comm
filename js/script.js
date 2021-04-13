@@ -3,6 +3,7 @@ import AnimateOnScroll from './modules/animateOnScroll.js'
 import DinamicScroll from './modules/dinamicScroll.js';
 import gridMenu from './modules/gridMenu.js';
 import SlideWithScrollbar from './modules/slideWithScrollbar.js';
+import textWriter from './modules/textWriter.js';
 
 const animateOnScroll = new AnimateOnScroll('section', '[data-js="animate"]');
 animateOnScroll.init();
@@ -23,3 +24,12 @@ clientsSlide.init();
 
 const socialMediaSlide = new SlideWithScrollbar('.social-media .slide', scrollbar, 20, 1, 2, 3);
 socialMediaSlide.init();
+
+const phrases = [
+    'De gente que acredita no que faz',
+    'Batatinha batatão, esparrama pelo chão',
+    'Se o rei tem dor nas costas, quem vai comer a torta?'
+]
+textWriter('.home h1', phrases, 80, 3000);
+
+

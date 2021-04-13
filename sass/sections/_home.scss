@@ -13,7 +13,9 @@
     color: white;
     overflow: hidden;
     h1 {
-        margin: 37px 0 33px 0;
+        margin: 37px auto 33px auto;
+        min-height: 51px;
+        text-align: center;
     }
     p {
         margin-bottom: 20px;
@@ -26,6 +28,7 @@
         h1 {
             margin-top: 18px;
             margin-bottom: 12px;
+            min-height: 72px;
         }
         p {
             margin-bottom: 20px;
@@ -92,6 +95,7 @@
         position: absolute;
         width: 100%;
         bottom: 5%;
+        will-change: transform;
         &.line {
             animation: unclipFromLeft_line 3s forwards;
         }
