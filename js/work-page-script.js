@@ -12,7 +12,7 @@ dinamicScroll.init();
 menuControl();
 
 const scrollbar = '.custom-scrollbar .thumb';
-const slide = new SlideWithScrollbar('.slide-container .slide', scrollbar, 12, 3, 3, 5);
+const slide = new SlideWithScrollbar('.slide-container .slide', scrollbar, 12, 3, 5, 5, 2);
 slide.init();
 
 

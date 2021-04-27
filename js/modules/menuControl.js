@@ -7,6 +7,9 @@ export default function menuControl() {
     const closeBtn = document.querySelector('.close');
     const options = document.querySelectorAll('a[class$=-opt]');
     const events = ['click', 'touchstart'];
+
+    const uri = document.documentURI;
+    const isIndex = !uri.includes('/works/');    
     
     function openMenu() {
         menu.classList.add('active');
@@ -51,6 +54,7 @@ export default function menuControl() {
     events.forEach(event => {
         sandwich.addEventListener(event, openMenu);
         closeBtn.addEventListener(event, closeMenu);
-        options.forEach(option => option.addEventListener(event, scrollToSection));
+
+        if (isIndex) options.forEach(option => option.addEventListener(event, scrollToSection));
     });
 }

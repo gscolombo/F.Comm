@@ -24,8 +24,6 @@ export default class SlideWithScrollbar{
     moveSlide(distance){
         this.movement.lastPos = distance;
 
-        console.log(distance);
-
         this.items.forEach(obj => {
             obj.item.style.transform = `translate3d(${distance}px, 0, 0)`;
         });
@@ -164,7 +162,7 @@ export default class SlideWithScrollbar{
     }
 
     changeSlideOnEnd(){
-        if (this.movement.distance > 100 && this.index.next !== null){
+        if (this.movement.distance > 50 && this.index.next !== null){
 
             if (this.index.next < this.index.last) {
                 this.changeSlide(this.index.next);
@@ -176,7 +174,7 @@ export default class SlideWithScrollbar{
                 }
             }
 
-        } else if (this.movement.distance < -100 && this.index.prev !== null){
+        } else if (this.movement.distance < -50 && this.index.prev !== null){
 
             if (this.index.prev > 0) {
                 this.changeSlide(this.index.prev);

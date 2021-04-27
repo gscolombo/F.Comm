@@ -3,7 +3,9 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;    
+    background-attachment: fixed;
+    animation: fadeIn 0.5s;
+        
 }
 
 .content-wrapper {

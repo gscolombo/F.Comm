@@ -87,13 +87,13 @@
     width: 100vw;
     bottom: 5%;
     @include media-querie('mobile'){
-        bottom: 10%;
-        transform: scale3d(2, 2, 2);
+        bottom: 20%;
     }
     img {
         position: absolute;
         width: 100%;
         bottom: 5%;
+        will-change: clip-path;
         &.line {
             animation: unclipFromLeft_line 3s forwards;
         }

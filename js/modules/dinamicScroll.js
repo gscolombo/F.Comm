@@ -40,8 +40,11 @@ export default class DinamicScroll extends AnimateOnScroll {
     init(){
         this.getOffsetDistance();
         this.startFunctions = this.startFunctions.bind(this);
-        this.options = document.querySelectorAll('.menu nav li a');
-        this.options[0].setAttribute('data-js', 'visible');
+
+        if (this.isIndex) {
+            this.options = document.querySelectorAll('.menu nav li a');
+            this.options[0].setAttribute('data-js', 'visible');
+        }
 
         window.addEventListener('scroll', this.startFunctions);
         return this;
