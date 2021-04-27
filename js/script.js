@@ -29,14 +29,16 @@ window.onload = () => {
     ]
     textWriter('.home h1', phrases, 80, 3000);
 
-    const scrollbar = '.custom-scrollbar .thumb';
-    const servicesSlide = new SlideWithScrollbar('.services .slide', scrollbar, 10, 1, 2, 3);
+    const scrollbarSelector = '.custom-scrollbar .thumb';
+    const scrollbarWidth =  document.querySelector(scrollbarSelector).clientWidth;
+
+    const servicesSlide = new SlideWithScrollbar('.services .slide', scrollbarSelector, scrollbarWidth, 10, 1, 2, 3);
     servicesSlide.init();
 
-    const clientsSlide = new SlideWithScrollbar('.clients .slide', scrollbar, 20, 3, 5, 5, 3);
+    const clientsSlide = new SlideWithScrollbar('.clients .slide', scrollbarSelector, scrollbarWidth, 20, 3, 5, 5, 3);
     clientsSlide.init();
 
-    const socialMediaSlide = new SlideWithScrollbar('.social-media .slide', scrollbar, 20, 1, 2, 3);
+    const socialMediaSlide = new SlideWithScrollbar('.social-media .slide', scrollbarSelector, scrollbarWidth, 20, 1, 2, 3);
     socialMediaSlide.init();
 }
 

@@ -21,14 +21,17 @@ export default class DinamicScroll extends AnimateOnScroll {
             }
         })
         const lastSection = sectionArr[sectionArr.length - 1];
-        const selector = lastSection + '-opt';
-        this.options.forEach(option => {
-            if (option.classList.contains(selector)) {
-                option.setAttribute('data-js', 'visible');
-            } else {
-                option.removeAttribute('data-js');
-            }
-        });
+
+        if (this.isIndex) {
+            const selector = lastSection + '-opt';
+            this.options.forEach(option => {
+                if (option.classList.contains(selector)) {
+                    option.setAttribute('data-js', 'visible');
+                } else {
+                    option.removeAttribute('data-js');
+                }
+            });
+        }
     }
 
     startFunctions(){

@@ -1,7 +1,9 @@
 export default class SlideWithScrollbar{
-    constructor(slide, scrollbar, gutter, mobile, tablet, desktop, scrollFactor = 1){
+    constructor(slide, scrollbar, scrollbarWidth, gutter, mobile, tablet, desktop, scrollFactor = 1){
         this.slide = document.querySelector(slide);
         this.scrollbar = this.slide.parentElement.querySelector(scrollbar);
+        this.scrollbarWidth = scrollbarWidth;
+
         this.movement = {start: 0, final: 0, distance: 0, finalScrollbarPos: 0};
 
         this.gutter = gutter;
@@ -40,7 +42,7 @@ export default class SlideWithScrollbar{
         
         if (index === lastPosition){
             index = index - 1;
-        };
+        }
 
         this.movement.finalScrollbarPos = this.scrollbarPositions[index];
         this.scrollbar.style.transform = `translate3d(${this.scrollbarPositions[index]}px, 0, 0)`;
@@ -58,16 +60,16 @@ export default class SlideWithScrollbar{
             this.scrollbar.style.transform = 'translate3d(0, 0, 0)';
             this.movement.lastScrollbarPos = 0;
             this.changeSlide(0);
-        } else if (this.movement.lastScrollbarPos > this.scrollbar.clientWidth) {
-            this.scrollbar.style.transform = `translate3d(${this.scrollbar.clientWidth}px, 0, 0)`;
-            this.movement.lastScrollbarPos = this.scrollbar.clientWidth;
+        } else if (this.movement.lastScrollbarPos > this.scrollbarWidth) {
+            this.scrollbar.style.transform = `translate3d(${this.scrollbarWidth}px, 0, 0)`;
+            this.movement.lastScrollbarPos = this.scrollbarWidth;
         }
     }
 
     resetIndexAfterScrolling(){
         const itemWidth = this.items[0].item.clientWidth / 2;
 
-        const distance = Math.floor((this.movement.lastScrollbarPos / this.scrollbar.clientWidth) * this.slideWidth);
+        const distance = Math.floor((this.movement.lastScrollbarPos / this.scrollbarWidth) * this.slideWidth);
         const upperLimit = Math.floor(distance + itemWidth);
         const lowerLimit = Math.floor(distance - itemWidth);
 
@@ -80,6 +82,7 @@ export default class SlideWithScrollbar{
         });
 
         setTimeout(() => {
+            console.log(scrollIndex);
             this.changeSlide(scrollIndex);
         }, 500);
 
@@ -87,9 +90,9 @@ export default class SlideWithScrollbar{
     }
 
     convertDistances(){
-        const factor = ((this.movement.finalScrollbarPos - this.movement.distance )/ this.scrollbar.clientWidth);
+        const factor = ((this.movement.finalScrollbarPos - this.movement.distance )/ this.scrollbarWidth);
         
-        this.movement.lastPos = Math.floor((this.movement.lastScrollbarPos / this.scrollbar.clientWidth) * this.slideWidth);
+        this.movement.lastPos = Math.floor((this.movement.lastScrollbarPos / this.scrollbarWidth) * this.slideWidth);
         this.movement.final = this.movement.lastPos;
 
         return Math.floor(factor * this.slideWidth);
@@ -124,7 +127,7 @@ export default class SlideWithScrollbar{
             const finalScrollPos = this.calcMovement(pointerX, this.scrollbar);
             this.moveScrollbar(finalScrollPos);
 
-            if (finalScrollPos > this.scrollbar.clientWidth || finalScrollPos < 0) {
+            if (finalScrollPos > this.scrollbarWidth || finalScrollPos < 0) {
                 this.stopScrolling();
             }
 
@@ -233,11 +236,13 @@ export default class SlideWithScrollbar{
         const threshold = this.setThreshold();
         const factor = this.items.length - threshold;
 
+
         this.scrollbarPositions = [];
-        const distance = Math.fround(this.scrollbar.clientWidth / factor);
+        const distance = Math.round(this.scrollbarWidth / factor);
 
         let position = 0;
         for (let i = 0; i < this.items.length - (threshold - 1); i++){
+
             this.scrollbarPositions.push(position);
             position += distance;
         }
@@ -270,9 +275,6 @@ export default class SlideWithScrollbar{
             this.setIndexPosition(index);
             this.movement.final = current.position;
             
-            const convertionCalc = (current.position / this.slideWidth) * this.scrollbar.clientWidth;
-            this.movement.finalScrollbarPos = Math.floor(convertionCalc);
-
             return index;
         }
     }
@@ -310,15 +312,14 @@ export default class SlideWithScrollbar{
     }
 
     init(){
-        if (this.slide && this.scrollbar){
+        if (this.slide && this.scrollbar && this.scrollbarWidth){
             this.slideConfig();
-            if (this.items.length) {
-                this.scrollbarConfig();
-                if (this.scrollbarPositions.length) {
-                    this.bindEvents();
-                    this.addEvents();
-                    this.changeSlide(0);
-                }
+            this.scrollbarConfig();
+
+            if (this.scrollbarPositions.length) {
+                this.bindEvents();
+                this.addEvents();
+                this.changeSlide(0);
             }
         }
     }
