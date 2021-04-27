@@ -306,9 +306,11 @@ export default class SlideWithScrollbar{
         if (this.slide && this.scrollbar){
             this.slideConfig();
             this.scrollbarConfig();
-            this.bindEvents();
-            this.addEvents();
-            this.changeSlide(0);
+            if (this.scrollbarPositions.length && this.items.length) {
+                this.bindEvents();
+                this.addEvents();
+                this.changeSlide(0);
+            }
         }
     }
 }
