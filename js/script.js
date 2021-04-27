@@ -5,6 +5,15 @@ import gridMenu from './modules/gridMenu.js';
 import SlideWithScrollbar from './modules/slideWithScrollbar.js';
 import textWriter from './modules/textWriter.js';
 
+window.onload = () => {
+    const phrases = [
+        'De gente que acredita no que faz',
+        'Batatinha batatão, esparrama pelo chão',
+        'Se o rei tem dor nas costas, quem vai comer a torta?'
+    ]
+    textWriter('.home h1', phrases, 80, 3000);
+}
+
 const animateOnScroll = new AnimateOnScroll('section', '[data-js="animate"]');
 animateOnScroll.init();
 
@@ -12,7 +21,6 @@ const dinamicScroll = new DinamicScroll('section');
 dinamicScroll.init();
 
 menuControl();
-
 gridMenu();
 
 const scrollbar = '.custom-scrollbar .thumb';
@@ -25,11 +33,5 @@ clientsSlide.init();
 const socialMediaSlide = new SlideWithScrollbar('.social-media .slide', scrollbar, 20, 1, 2, 3);
 socialMediaSlide.init();
 
-const phrases = [
-    'De gente que acredita no que faz',
-    'Batatinha batatão, esparrama pelo chão',
-    'Se o rei tem dor nas costas, quem vai comer a torta?'
-]
-textWriter('.home h1', phrases, 80, 3000);
 
 

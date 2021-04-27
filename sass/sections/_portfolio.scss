@@ -106,6 +106,7 @@
         li {
             transition: all 0.3s;
             cursor: pointer;
+            will-change: transform;
             &:hover {
                 transform: scale3d(1.1, 1.1, 1.1);
             }

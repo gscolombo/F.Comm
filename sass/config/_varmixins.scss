@@ -65,6 +65,10 @@ $x-large: 1920px;
             @include media-querie('mobile') {
                 width: 100%;
             }
+
+            .item {
+                will-change: transform;
+            }
         }
         .custom-scrollbar {
             max-width: 100px;

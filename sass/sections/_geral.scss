@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    will-change: scroll-position;
 }
 
 .container {
@@ -178,6 +177,7 @@ section header {
                 height: 80px;
                 transition: all 0.5s;
                 &.bg-set {
+                    background-color: $pink;
                     height: 40px;
                     .logo {
                         left: 10%;
