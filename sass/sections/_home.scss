@@ -94,7 +94,7 @@
         width: 100%;
         bottom: 5%;
         will-change: clip-path;
-        &.line {
+        &.line.active {
             animation: unclipFromLeft_line 3s forwards;
         }
     }
@@ -111,7 +111,9 @@
             } @else if $i >= 7 {
                 transform-origin: right;
             }
-            animation: grow 0.33s 0.2s * $i forwards;
+            &.active {
+                animation: grow 0.33s 0.2s * $i forwards;
+            }
         }
     }
 }
