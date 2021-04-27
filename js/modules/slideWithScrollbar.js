@@ -97,7 +97,6 @@ export default class SlideWithScrollbar{
 
     start(event){
         event.preventDefault();
-
         this.movement.lastPageYPos = window.pageYOffset;
 
        let type;
@@ -141,6 +140,7 @@ export default class SlideWithScrollbar{
                 }
             }
         }
+
     }
 
     end(event){
@@ -159,11 +159,12 @@ export default class SlideWithScrollbar{
             this.movement.finalScrollbarPos = this.movement.lastScrollbarPos;
             this.movement.final = this.movement.lastPos;
         }
+
+        this.movement.distance = 0;
     }
 
     changeSlideOnEnd(){
         if (this.movement.distance > 50 && this.index.next !== null){
-
             if (this.index.next < this.index.last) {
                 this.changeSlide(this.index.next);
             } else {
