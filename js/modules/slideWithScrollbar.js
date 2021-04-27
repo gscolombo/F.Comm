@@ -203,19 +203,25 @@ export default class SlideWithScrollbar{
     }
 
     slideConfig() {
-        let offset;
         const threshold = this.setThreshold();
+        let offset;
+        let difference;
 
         this.items = [...this.slide.children].map((item, index, array) => {
-            if (index <= (array.length - threshold)) {
-                if (this.pageWidth < 768) {
-                    offset = Math.floor(-item.offsetLeft + ((this.pageWidth - ((item.clientWidth + this.gutter) * this.mobile)) / 2));
-                } else if (this.pageWidth >= 768 && this.pageWidth < 960){
-                    offset = Math.floor(-item.offsetLeft + ((this.pageWidth - ((item.clientWidth + this.gutter) * this.tablet)) / 2));
-                } else if (this.pageWidth >= 960) {
-                    offset = Math.floor(-item.offsetLeft + ((this.pageWidth - ((item.clientWidth + this.gutter) * this.desktop)) / 2));
-                }
+            
+            if (this.pageWidth < 768) {
+                if (this.mobile === 1)
+                    this.gutter = 0;  
+                difference = this.pageWidth - ((item.clientWidth +  this.gutter) * this.mobile);
+            } else if (this.pageWidth >= 768 && this.pageWidth < 960){
+                difference = this.pageWidth - ((item.clientWidth +  this.gutter) * this.tablet);
+            } else if (this.pageWidth >= 960) {
+                difference = this.pageWidth - ((item.clientWidth +  this.gutter) * this.desktop);
             }
+
+            if (index <= (array.length - threshold)) 
+                offset = Math.round(-item.offsetLeft + (difference / 2));
+            
             return { item, index, position: offset};
         });
 
@@ -305,11 +311,13 @@ export default class SlideWithScrollbar{
     init(){
         if (this.slide && this.scrollbar){
             this.slideConfig();
-            this.scrollbarConfig();
-            if (this.scrollbarPositions.length && this.items.length) {
-                this.bindEvents();
-                this.addEvents();
-                this.changeSlide(0);
+            if (this.items.length) {
+                this.scrollbarConfig();
+                if (this.scrollbarPositions.length) {
+                    this.bindEvents();
+                    this.addEvents();
+                    this.changeSlide(0);
+                }
             }
         }
     }

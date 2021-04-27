@@ -17,6 +17,7 @@
         flex-direction: column;
         align-items: center;
         transition: all 0.3s ease-out;
+        flex-grow: 1;
         @include media-querie('tablet') {
             min-width: calc(50% - 40px);
         }
