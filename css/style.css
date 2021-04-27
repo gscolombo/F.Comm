@@ -594,6 +594,10 @@ footer .social-media-links img {
   bottom: 5%;
   will-change: clip-path;
 }
+.cool-line img.line {
+  -webkit-clip-path: inset(0 100% 0 0);
+          clip-path: inset(0 100% 0 0);
+}
 .cool-line img.line.active {
   -webkit-animation: unclipFromLeft_line 3s forwards;
           animation: unclipFromLeft_line 3s forwards;

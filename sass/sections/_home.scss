@@ -94,8 +94,11 @@
         width: 100%;
         bottom: 5%;
         will-change: clip-path;
-        &.line.active {
-            animation: unclipFromLeft_line 3s forwards;
+        &.line {
+            clip-path: inset(0 100% 0 0);
+            &.active {
+                animation: unclipFromLeft_line 3s forwards;
+            }
         }
     }
 }

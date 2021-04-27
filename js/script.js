@@ -6,6 +6,13 @@ import SlideWithScrollbar from './modules/slideWithScrollbar.js';
 import textWriter from './modules/textWriter.js';
 
 window.onload = () => {
+    const coolLine = document.querySelector('.cool-line');
+    coolLine.querySelector('.line').classList.add('active');
+    [...coolLine.querySelector('.bubbles').children].forEach(item => {
+        item.classList.add('active');
+    });
+    
+
     const animateOnScroll = new AnimateOnScroll('section', '[data-js="animate"]');
     animateOnScroll.init();
 
