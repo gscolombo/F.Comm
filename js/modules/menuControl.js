@@ -2,14 +2,13 @@ import outclick from './outclick.js';
 
 export default function menuControl() {
     const sections = document.querySelectorAll('section');
-    const sectionsOffset = [...sections].map(section => section.offsetTop);
-
-    console.log(sectionsOffset);
+    let sectionsOffset;
 
     const menu = document.querySelector('.menu');
     const sandwich = document.querySelector('.sandwich');
     const closeBtn = document.querySelector('.close');
     const options = document.querySelectorAll('a[class$=-opt]');
+    
     const events = ['click', 'touchend'];
 
     const uri = document.documentURI;
@@ -17,6 +16,7 @@ export default function menuControl() {
     
     function openMenu(event) {
         event.preventDefault();
+        sectionsOffset = [...sections].map(section => section.offsetTop);
         menu.classList.add('active');
         outclick('.menu', closeMenu, events);
     }
@@ -30,20 +30,22 @@ export default function menuControl() {
         event.preventDefault();
         const link = event.currentTarget;
 
+        sectionsOffset = [...sections].map(section => section.offsetTop);
+
         sections.forEach((section, index) => {
            if (link.classList.contains((section.getAttribute('id') + '-opt'))){
                 const sectionHeader = sectionsOffset[index];
-                
+
                 if (sectionHeader !== null) {
                     if (!section.classList.contains('services')) {
                         scrollTo({
-                            top: sectionHeader - 80,
+                            top: sectionHeader - 100,
                             left: 0,
                             behavior: 'smooth',
                         });
                     } else {
                         scrollTo({
-                            top: sectionHeader - 20,
+                            top: sectionHeader - 40,
                             left: 0,
                             behavior: 'smooth',
                         });
