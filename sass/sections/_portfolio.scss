@@ -96,7 +96,7 @@
             animation: grow 0.3s;
         }
         @include media-querie('mobile'){
-            height: 900px;
+            height: fit-content;
             grid-template-columns: 1fr 1fr;
             grid-template-areas: "a b" 
                                  "c d" 

@@ -956,7 +956,9 @@ footer .social-media-links img {
 }
 @media (max-width: 767px) {
   .works ul {
-    height: 900px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "a b" "c d" "e f" "g h" "i j";
     gap: 20px;
