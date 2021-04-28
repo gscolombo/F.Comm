@@ -52,6 +52,8 @@ export default function menuControl() {
                 }
             }
         })
+
+        document.querySelector('.menu').classList.remove('active');
     }
 
     events.forEach(event => {
