@@ -79,14 +79,19 @@
     @include media-querie('mobile') {
     }
     ul {
+        min-width: 100%;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-areas: "a b c d e"
-                             "f g h i j";
+                             "f g h i j"
+                             "k l m n p"
+                             "o q r s t"
+                             "u v w x y"
+                             "z . . . .";
         gap: 20px;
+        
         .hidden {
             transform: scale(0);
-            
         }
         .waiting {
             transform: scale(0);

@@ -2,8 +2,10 @@ export default function gridMenu(){
     const menu = document.querySelector('.portfolio .list nav');
     const options = menu.querySelectorAll('button[data-port]');
     const openBtn = menu.querySelector('.open');
-    const works = document.querySelectorAll('.portfolio .works ul [data-port]');
-    const events = ['click', 'touchstart'];
+    const works = [...document.querySelectorAll('.portfolio .works ul [data-port]')];
+    const workGrid = document.querySelector('.portfolio .works ul');
+
+    const events = ['click', 'touchend'];    
 
     function timer(f, args, timer) {
         setTimeout( () => {
@@ -14,17 +16,51 @@ export default function gridMenu(){
     function sortItems(){
         const alphabet = 'abcdfeghijklmnopqrstuvwyxz'.split('');
         const items = [];
-        works.forEach(work => {
+
+        
+        let gridArea = '';
+        let gridAreaString = '';
+        const desktopRegexp = /\w{1,5}/g;
+        const mobileRegexp = /\w{1,2}/g;
+
+        works.forEach((work, index) => {
             if (work.classList.contains('selected')){
                 items.unshift(work);
             } else if (work.classList.contains('hidden')) {
                 items.push(work);
             }
+
+            gridAreaString += alphabet[index];
         });
 
-        for (let i = 0; i < items.length & i <= 10; i++) {
-            items[i].style.gridArea = `${alphabet[i]}`;
-        };
+        let gridAreaRows;
+        if (window.innerWidth > 768) {
+            gridAreaRows = gridAreaString.match(desktopRegexp);
+            gridAreaRows.forEach(row => {
+                while (row.length < 5) {
+                    row += '.';
+                }
+    
+                row = row.split('').join(' ');
+                gridArea += `"${row}"\n`;
+            })
+        } else {
+            gridAreaRows = gridAreaString.match(mobileRegexp);
+            gridAreaRows.forEach(row => {
+                while (row.length < 2) {
+                    row += '.';
+                }
+    
+                row = row.split('').join(' ');
+                gridArea += `"${row}"\n`;
+            })
+        }
+
+        workGrid.style.gridTemplateAreas = gridArea;
+
+        items.forEach((item, index) => {
+            item.style.gridArea = alphabet[index];
+        })
     }
 
     function selectItems(element, attr){
@@ -84,6 +120,7 @@ export default function gridMenu(){
         if (!openBtn.classList.contains('active')){
             openBtn.classList.add('active');
             options.forEach(btn => {
+                btn.removeAttribute('disabled');
                 if (!btn.classList.contains('selected')) {
                     btn.classList.remove('hidden');
                 }   
@@ -91,6 +128,7 @@ export default function gridMenu(){
         } else {
             openBtn.classList.remove('active');
             options.forEach(btn => {
+                btn.setAttribute('disabled', 'true');
                 if (!btn.classList.contains('selected')){
                     btn.classList.add('hidden');
                 }
