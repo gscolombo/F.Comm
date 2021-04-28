@@ -68,6 +68,7 @@ export default class SlideWithScrollbar{
             return this.scrollbarWidth;
         }
 
+
         this.stopScrolling();
 
     }
@@ -176,11 +177,11 @@ export default class SlideWithScrollbar{
             this.movement.finalScrollbarPos = this.movement.lastScrollbarPos;
             this.movement.final = this.movement.lastPos;
         }
-
-        this.movement.distance = 0;
+        console.log(this.index);
     }
 
     changeSlideOnEnd(){
+        console.log(this.movement);
         if (this.movement.distance > 50 && this.index.next !== null){
             if (this.index.next < this.index.last) {
                 this.changeSlide(this.index.next);
