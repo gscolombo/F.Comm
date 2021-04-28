@@ -5,8 +5,6 @@ import gridMenu from './modules/gridMenu.js';
 import SlideWithScrollbar from './modules/slideWithScrollbar.js';
 import textWriter from './modules/textWriter.js';
 
-HTMLImageElement.loading = 'eager';
-
 window.onload = () => {
     const coolLine = document.querySelector('.cool-line');
     coolLine.querySelector('.line').classList.add('active');

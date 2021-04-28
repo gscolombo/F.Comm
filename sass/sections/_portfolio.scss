@@ -76,6 +76,9 @@
 .works {
     min-width: 60%;
     margin: 40px 20px 0 20px;
+    @include media-querie('mobile') {
+        height: min(870px);
+    }
     ul {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -96,7 +99,6 @@
             animation: grow 0.3s;
         }
         @include media-querie('mobile'){
-            height: fit-content;
             grid-template-columns: 1fr 1fr;
             grid-template-areas: "a b" 
                                  "c d" 
