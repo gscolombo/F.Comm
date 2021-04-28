@@ -2,6 +2,10 @@ import outclick from './outclick.js';
 
 export default function menuControl() {
     const sections = document.querySelectorAll('section');
+    const sectionsOffset = [...sections].map(section => section.offsetTop);
+
+    console.log(sectionsOffset);
+
     const menu = document.querySelector('.menu');
     const sandwich = document.querySelector('.sandwich');
     const closeBtn = document.querySelector('.close');
@@ -26,21 +30,20 @@ export default function menuControl() {
         event.preventDefault();
         const link = event.currentTarget;
 
-        sections.forEach(section => {
+        sections.forEach((section, index) => {
            if (link.classList.contains((section.getAttribute('id') + '-opt'))){
-                const sectionHeader = section.querySelector('header');
-                console.log(sectionHeader.offsetTop);
-                console.log(section.offsetTop);
+                const sectionHeader = sectionsOffset[index];
+                
                 if (sectionHeader !== null) {
                     if (!section.classList.contains('services')) {
                         scrollTo({
-                            top: sectionHeader.offsetTop - 80,
+                            top: sectionHeader - 80,
                             left: 0,
                             behavior: 'smooth',
                         });
                     } else {
                         scrollTo({
-                            top: sectionHeader.offsetTop - 20,
+                            top: sectionHeader - 20,
                             left: 0,
                             behavior: 'smooth',
                         });
