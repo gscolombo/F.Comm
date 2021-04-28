@@ -774,6 +774,7 @@ footer .social-media-links img {
 .services .slide-container .custom-scrollbar .thumb {
   position: absolute;
   padding: 20px 0;
+  min-width: 50px;
   left: 0;
   cursor: pointer;
   transition: all 0.3s ease-out;
@@ -1015,6 +1016,7 @@ footer .social-media-links img {
 .clients .slide-container .custom-scrollbar .thumb {
   position: absolute;
   padding: 20px 0;
+  min-width: 50px;
   left: 0;
   cursor: pointer;
   transition: all 0.3s ease-out;
@@ -1085,6 +1087,7 @@ footer .social-media-links img {
 .social-media .slide-container .custom-scrollbar .thumb {
   position: absolute;
   padding: 20px 0;
+  min-width: 50px;
   left: 0;
   cursor: pointer;
   transition: all 0.3s ease-out;
@@ -1369,6 +1372,7 @@ footer .social-media-links img {
 .slide-wrapper .slide-container .custom-scrollbar .thumb {
   position: absolute;
   padding: 20px 0;
+  min-width: 50px;
   left: 0;
   cursor: pointer;
   transition: all 0.3s ease-out;

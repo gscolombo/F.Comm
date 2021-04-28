@@ -80,6 +80,7 @@ $x-large: 1920px;
             .thumb {
                 position: absolute;
                 padding: 20px 0;
+                min-width: 50px;
                 left: 0;
                 cursor: pointer;
                 transition: all 0.3s ease-out;

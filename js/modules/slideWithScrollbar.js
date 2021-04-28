@@ -288,10 +288,8 @@ export default class SlideWithScrollbar{
             this.setIndexPosition(index);
             this.movement.final = current.position;
 
-            console.log(this.index);
             this.movement.lastScrollbarPos = this.scrollbarPositions[index];
             
-
             return index;
         }
     }
