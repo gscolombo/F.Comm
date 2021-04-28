@@ -19,7 +19,9 @@ export default class DinamicScroll extends AnimateOnScroll {
             if (!(pageYOffset < obj.offset + (innerHeight * 0.3))){
                 sectionArr.push(obj.section.classList.value);
             }
-        })
+        });
+
+        console.log(sectionArr);
         const lastSection = sectionArr[sectionArr.length - 1];
 
         if (this.isIndex) {
@@ -42,7 +44,9 @@ export default class DinamicScroll extends AnimateOnScroll {
 
     init(){
         this.getOffsetDistance();
-    
+
+        console.log(this.offset);
+        
         if (this.sections.length && this.offset.length) {
             this.startFunctions = this.startFunctions.bind(this);
     

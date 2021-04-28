@@ -11,12 +11,14 @@ export default function menuControl() {
     const uri = document.documentURI;
     const isIndex = !uri.includes('/works/');    
     
-    function openMenu() {
+    function openMenu(event) {
+        event.preventDefault();
         menu.classList.add('active');
         outclick('.menu', closeMenu, events);
     }
     
-    function closeMenu() {
+    function closeMenu(event) {
+        event.preventDefault();
         menu.classList.remove('active');
     }
     
