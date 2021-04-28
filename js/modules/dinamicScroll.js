@@ -40,13 +40,10 @@ export default class DinamicScroll extends AnimateOnScroll {
         this.getOffsetDistance();
         this.changeMenuBg();
         this.pointSection();
-
-        console.log(this.offset);
     }
 
     init(){
         if (this.sections.length) {
-            this.getOffsetDistance();
             this.startFunctions = debounce(this.startFunctions.bind(this), 50);
     
             if (this.isIndex) {
@@ -54,8 +51,6 @@ export default class DinamicScroll extends AnimateOnScroll {
                 this.options[0].setAttribute('data-js', 'visible');
             }
             
-            console.log(this.offset);
-        
             window.addEventListener('scroll', this.startFunctions);
             return this;
         }

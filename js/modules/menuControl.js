@@ -29,6 +29,8 @@ export default function menuControl() {
         sections.forEach(section => {
            if (link.classList.contains((section.getAttribute('id') + '-opt'))){
                 const sectionHeader = section.querySelector('header');
+                console.log(sectionHeader.offsetTop);
+                console.log(section.offsetTop);
                 if (sectionHeader !== null) {
                     if (!section.classList.contains('services')) {
                         scrollTo({
