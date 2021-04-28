@@ -6,7 +6,7 @@ export default function menuControl() {
     const sandwich = document.querySelector('.sandwich');
     const closeBtn = document.querySelector('.close');
     const options = document.querySelectorAll('a[class$=-opt]');
-    const events = ['click', 'touchstart'];
+    const events = ['click', 'touchend'];
 
     const uri = document.documentURI;
     const isIndex = !uri.includes('/works/');    
@@ -18,13 +18,14 @@ export default function menuControl() {
     }
     
     function closeMenu(event) {
-        event.preventDefault();
+        if (event) event.preventDefault();
         menu.classList.remove('active');
     }
     
     function scrollToSection(event){
         event.preventDefault();
         const link = event.currentTarget;
+
         sections.forEach(section => {
            if (link.classList.contains((section.getAttribute('id') + '-opt'))){
                 const sectionHeader = section.querySelector('header');
