@@ -6,8 +6,8 @@ export default function outClick(selector, f, eventArr) {
     function close(event) {
         const target = event.target;
         if (!element.contains(target)) {
-            f();
             events.forEach(event => {
+                f(event);
                 html.removeEventListener(event, close);
             })
         }
