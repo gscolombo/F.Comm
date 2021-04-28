@@ -96,12 +96,14 @@
             animation: grow 0.3s;
         }
         @include media-querie('mobile'){
+            min-height: 900px;
             grid-template-columns: 1fr 1fr;
             grid-template-areas: "a b" 
                                  "c d" 
                                  "e f"
                                  "g h" 
                                  "i j";
+            gap: 20px;
         }
         li {
             transition: all 0.3s;

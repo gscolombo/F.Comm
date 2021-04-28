@@ -21,7 +21,6 @@ export default class DinamicScroll extends AnimateOnScroll {
             }
         });
 
-        console.log(sectionArr);
         const lastSection = sectionArr[sectionArr.length - 1];
 
         if (this.isIndex) {
