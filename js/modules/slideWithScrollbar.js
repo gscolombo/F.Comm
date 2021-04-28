@@ -172,16 +172,17 @@ export default class SlideWithScrollbar{
         if (event.currentTarget === this.slide) {
             this.changeSlideOnEnd();
         } else if (event.currentTarget === this.scrollbar) {
-            this.resetIndexAfterScrolling();
+            if (this.movement.lastScrollbarPos > 0 && this.movement.lastScrollbarPos < this.scrollbarWidth) {
+                this.resetIndexAfterScrolling();
+            }
+                
             
             this.movement.finalScrollbarPos = this.movement.lastScrollbarPos;
             this.movement.final = this.movement.lastPos;
         }
-        console.log(this.index);
     }
 
     changeSlideOnEnd(){
-        console.log(this.movement);
         if (this.movement.distance > 50 && this.index.next !== null){
             if (this.index.next < this.index.last) {
                 this.changeSlide(this.index.next);
@@ -194,7 +195,6 @@ export default class SlideWithScrollbar{
             }
 
         } else if (this.movement.distance < -50 && this.index.prev !== null){
-
             if (this.index.prev > 0) {
                 this.changeSlide(this.index.prev);
             } else {
