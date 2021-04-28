@@ -1,3 +1,5 @@
+import debounce from "./debounce.js";
+
 export default class SlideWithScrollbar{
     constructor(slide, scrollbar, scrollbarWidth, gutter, mobile, tablet, desktop, scrollFactor = 1){
         this.slide = document.querySelector(slide);
@@ -323,7 +325,7 @@ export default class SlideWithScrollbar{
         this.start = this.start.bind(this);
         this.move = this.move.bind(this);
         this.end = this.end.bind(this);
-        this.onWindowResize = this.onWindowResize.bind(this);
+        this.onWindowResize = debounce(this.onWindowResize.bind(this), 50);
     }
 
     init(){

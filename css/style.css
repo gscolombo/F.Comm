@@ -848,7 +848,6 @@ footer .social-media-links img {
 }
 
 .list {
-  height: min(1200px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -975,7 +974,6 @@ footer .social-media-links img {
 }
 
 .clients {
-  height: min(450px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1056,9 +1054,6 @@ footer .social-media-links img {
   transform: scale3d(1.1, 1.1, 1.1);
 }
 
-.social-media {
-  height: min(500px);
-}
 .social-media .slide-container {
   min-width: 100%;
   margin: 0 auto;

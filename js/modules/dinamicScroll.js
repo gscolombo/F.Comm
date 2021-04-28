@@ -1,3 +1,4 @@
+import debounce from './debounce.js';
 import AnimateOnScroll from './animateOnScroll.js';
 
 export default class DinamicScroll extends AnimateOnScroll {
@@ -21,8 +22,6 @@ export default class DinamicScroll extends AnimateOnScroll {
             }
         });
 
-        console.log(this.offset);
-
         const lastSection = sectionArr[sectionArr.length - 1];
 
         if (this.isIndex) {
@@ -38,24 +37,22 @@ export default class DinamicScroll extends AnimateOnScroll {
     }
 
     startFunctions(){
+        this.getOffsetDistance();
         this.changeMenuBg();
         this.pointSection();
         document.querySelector('.menu').classList.remove('active');
     }
 
     init(){
-        this.getOffsetDistance();
-
-        console.log(this.offset);
-        
-        if (this.sections.length && this.offset.length) {
-            this.startFunctions = this.startFunctions.bind(this);
+        if (this.sections.length) {
+            this.startFunctions = debounce(this.startFunctions.bind(this), 50);
     
             if (this.isIndex) {
                 this.options = document.querySelectorAll('.menu nav li a');
                 this.options[0].setAttribute('data-js', 'visible');
             }
-    
+            
+        
             window.addEventListener('scroll', this.startFunctions);
             return this;
         }
