@@ -16,10 +16,12 @@ export default class DinamicScroll extends AnimateOnScroll {
     pointSection(){
         const sectionArr = [];
         this.offset.forEach(obj => {
-            if (!(pageYOffset < obj.offset + (innerHeight * 0.3))){
+            if (!(window.pageYOffset < obj.offset + (window.innerHeight * 0.3))){
                 sectionArr.push(obj.section.classList.value);
             }
         });
+
+        console.log(this.offset);
 
         const lastSection = sectionArr[sectionArr.length - 1];
 
