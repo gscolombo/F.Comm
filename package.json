@@ -1,0 +1,27 @@
+{
+  "name": "f.comms",
+  "version": "1.0.0",
+  "description": "Website devoloped for F.Comunicaçao communications agency",
+  "private": true,
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gscolombo/F.Comm.git"
+  },
+  "author": "Gabriel S.C",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gscolombo/F.Comm/issues"
+  },
+  "homepage": "https://github.com/gscolombo/F.Comm#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.36.1",
+    "webpack-cli": "^4.6.0"
+  }
+}

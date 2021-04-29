@@ -5,12 +5,64 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     animation: fadeIn 0.5s;
-        
+}
+
+.menu.work-page {
+    position: fixed;
+    height: fit-content;
+    right: 0;
+    min-width: 100vw;
+    transition: all 0.5s;
+    &.bg-set {
+        transform: translate3d(0, -25%, 0);
+    }
+}
+
+.menu nav.work-page {
+    justify-content: space-around;
+    img {
+        position: static;
+    }
+    @include media-querie('mobile&tablet') {
+        background: transparent;
+    }
+    transition: all 0.5s;
+    &.bg-set {
+        ul {
+            transform: translate3d(0, 50%, 0);
+            @include media-querie('tablet') {
+                transform: translate3d(0, 30%, 0);
+            }
+        }
+        img {
+            transform: scale3d(0.75, 0.75, 0.75) translate3d(0, 20%, 0);
+        }
+    }
+}
+
+.menu .work-page-list {
+    flex-direction: row;
+    min-height: 100%;
+    padding: 0;
+    transition: all 0.5s;
+
+    @include media-querie('tablet') {
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0;
+        min-height: 100%;
+    }
 }
 
 .content-wrapper {
     header {
         max-width: 960px;
+        @include media-querie('tablet') {
+            min-width: 90%;
+        }
+        @include media-querie('mobile') {
+            margin-bottom: 0
+        }
         h1 {
             @include typo(64, 700);
             color: $dark-blue;
@@ -25,6 +77,7 @@
         margin-top: 76px;
         text-align: left;
         p {
+            width: 100%;
             margin: 0 auto 30px auto;
         }
     }
@@ -40,6 +93,16 @@
         p {
             max-width: 60%;
             margin: 30px auto;
+        }
+        @include media-querie('mobile') {
+            max-width: 90%;
+            p {
+                margin: 15px auto;
+                max-width: 80%;
+            }
+            img {
+                margin: 15px 0;
+            }
         }
     }
 
@@ -62,11 +125,18 @@
     }
     @include slide;
     .item {
+        padding: 10px 0;
         margin: 0 10px;
         min-width: calc(20% - 20px);
         transition: all 0.3s ease-out;
         @include media-querie('mobile') {
             min-width: calc(33.3% - 20px);
+        }
+        img {
+            transition: transform 0.3s;
+        }
+        & img:hover {
+            transform: scale3d(1.1, 1.1, 1.1);
         }
     }
 }

@@ -1,8 +1,10 @@
+import debounce from './debounce.js';
+
 export default class AnimateOnScroll {
     constructor(section, selector) {
         this.sections = document.querySelectorAll(section);
         this.selector = selector;
-        this.checkDistance = this.checkDistance.bind(this);
+        this.checkDistance = debounce(this.checkDistance.bind(this), 50);
         this.isIndex = !document.documentURI.includes('/works/');
     }
 
@@ -29,14 +31,20 @@ export default class AnimateOnScroll {
     }
 
     checkDistance() {
-        const lastSection = this.offset[this.offset.length - 1].offset;
+        const lastSection = this.offset[this.offset.length - 1];
         this.offset.forEach(offset => {
             if (window.pageYOffset >= offset.offset) {
                 this.addClass(offset.section, this.selector);
             }
-        })
-        if (window.pageYOffset >= lastSection)
+        });
+
+
+        if (window.pageYOffset >= lastSection.offset) {
             window.removeEventListener('scroll', this.checkDistance);
+        } else if (window.pageYOffset === window.scrollY) {
+            this.addClass(lastSection.section, this.selector);
+        }
+            
     }
 
     init() {

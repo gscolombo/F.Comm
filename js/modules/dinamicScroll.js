@@ -1,4 +1,3 @@
-import debounce from './debounce.js';
 import AnimateOnScroll from './animateOnScroll.js';
 
 export default class DinamicScroll extends AnimateOnScroll {
@@ -36,15 +35,16 @@ export default class DinamicScroll extends AnimateOnScroll {
         }
     }
 
-    startFunctions(){
-        this.getOffsetDistance();
+    startFunctions(){        
         this.changeMenuBg();
         this.pointSection();
+        document.querySelector('.menu').classList.remove('active');
     }
 
     init(){
         if (this.sections.length) {
-            this.startFunctions = debounce(this.startFunctions.bind(this), 50);
+            this.getOffsetDistance();
+            this.startFunctions = this.startFunctions.bind(this);
     
             if (this.isIndex) {
                 this.options = document.querySelectorAll('.menu nav li a');

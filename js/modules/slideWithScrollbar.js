@@ -93,7 +93,7 @@ export default class SlideWithScrollbar{
 
         setTimeout(() => {
             this.changeSlide(scrollIndex);
-        }, 500);
+        }, 100);
 
         this.scrollbar.removeEventListener('mouseout', this.end);
     }
@@ -130,7 +130,7 @@ export default class SlideWithScrollbar{
     move(event){
         event.preventDefault();
         const pointerX = event.type === 'mousemove' ? event.clientX : event.changedTouches[0].clientX;
-        const finalPos = this.calcMovement(pointerX);
+        let finalPos = this.calcMovement(pointerX);
 
         if (event.target === this.scrollbar) {
             let finalScrollPos = this.calcMovement(pointerX, this.scrollbar);
@@ -150,8 +150,16 @@ export default class SlideWithScrollbar{
             this.moveScrollbar(finalScrollPos);
             this.moveSlide(distance);
         } else {
-            if (this.movement.distance > 10 || this.movement.distance < -10)
+            if (this.movement.distance > 10 || this.movement.distance < -10) {
+
+                if (finalPos < this.slideWidth - 100) {
+                    finalPos = this.slideWidth;
+                } else if (finalPos > this.items[0].position + 100) {
+                    finalPos = this.items[0].position;
+                }
+
                 this.moveSlide(finalPos);
+            }
             else {
                 if (event.type === 'touchmove'){
                     const scrollDistance = this.movement.lastYPos - event.changedTouches[0].clientY;

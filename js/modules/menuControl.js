@@ -39,13 +39,13 @@ export default function menuControl() {
                 if (sectionHeader !== null) {
                     if (!section.classList.contains('services')) {
                         scrollTo({
-                            top: sectionHeader - 100,
+                            top: sectionHeader - 80,
                             left: 0,
                             behavior: 'smooth',
                         });
                     } else {
                         scrollTo({
-                            top: sectionHeader - 40,
+                            top: sectionHeader - 20,
                             left: 0,
                             behavior: 'smooth',
                         });
