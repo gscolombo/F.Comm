@@ -5,7 +5,7 @@ export default class AnimateOnScroll {
         this.sections = document.querySelectorAll(section);
         this.selector = selector;
         this.checkDistance = debounce(this.checkDistance.bind(this), 50);
-        this.isIndex = !document.documentURI.includes('/works/');
+        this.isIndex = !document.documentURI.includes('/projects/');
     }
 
     addClass(el, selector) {

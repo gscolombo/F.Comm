@@ -12,7 +12,7 @@ export default function menuControl() {
     const events = ['click', 'touchend'];
 
     const uri = document.documentURI;
-    const isIndex = !uri.includes('/works/');    
+    const isIndex = !uri.includes('/projects/');    
     
     function openMenu(event) {
         event.preventDefault();

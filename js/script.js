@@ -20,7 +20,7 @@ window.onload = () => {
     const scrollbarWidth =  document.querySelector(scrollbarSelector).clientWidth;
     
 
-    if (!document.documentURI.includes('/works/')) {
+    if (!document.documentURI.includes('/projects/')) {
         const coolLine = document.querySelector('.cool-line');
         coolLine.querySelector('.line').classList.add('active');
         [...coolLine.querySelector('.bubbles').children].forEach(item => {
