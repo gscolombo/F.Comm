@@ -48,6 +48,9 @@ p, a  {
 
 a {
     text-decoration: none;
+    &.disabled {
+        pointer-events: none;
+    }
 }
 
 img {

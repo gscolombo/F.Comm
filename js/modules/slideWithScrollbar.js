@@ -125,6 +125,10 @@ export default class SlideWithScrollbar{
        this.slide.addEventListener(type, this.move);
        this.scrollbar.addEventListener(type, this.move);
        this.scrollbar.addEventListener('mouseout', this.end);
+
+        if ([...document.querySelectorAll('.slide a')].includes(event.path[1])) {
+            event.path[1].classList.remove('disabled');
+        }
     }
 
     move(event){
@@ -167,11 +171,11 @@ export default class SlideWithScrollbar{
                 }
             }
         }
-
     }
 
     end(event){
         event.preventDefault();
+
         const type = event.type === 'mouseup' || event.type === 'mouseout' ? 'mousemove' : 'touchmove';
         
         this.slide.removeEventListener(type, this.move);
@@ -184,9 +188,13 @@ export default class SlideWithScrollbar{
                 this.resetIndexAfterScrolling();
             }
                 
-            
             this.movement.finalScrollbarPos = this.movement.lastScrollbarPos;
             this.movement.final = this.movement.lastPos;
+        }
+
+        const containsLink = [...document.querySelectorAll('.slide a')].includes(event.path[1]);
+        if (containsLink && this.movement.distance !== 0) {
+            event.path[1].classList.add('disabled');
         }
     }
 
